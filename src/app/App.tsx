@@ -1,11 +1,5 @@
-import { MainButton } from '../shared/ui/main-button/MainButton';
-
 function App() {
-	return (
-		<>
-			<MainButton content="coaoa" />
-		</>
-	);
+	return <div></div>;
 }
 
 export default App;
