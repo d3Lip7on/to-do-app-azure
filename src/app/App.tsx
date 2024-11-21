@@ -2,9 +2,9 @@ import { Canvas } from '../shared/ui/Canvas';
 
 function App() {
 	return (
-		<div>
-			<Canvas />
-		</div>
+		<Canvas>
+			<h1 className="text-[65px] font-bold">New Task</h1>
+		</Canvas>
 	);
 }
 
