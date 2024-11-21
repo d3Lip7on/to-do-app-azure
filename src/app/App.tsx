@@ -1,19 +1,9 @@
 import { useState } from 'react';
 import { TextArea } from '../shared/ui/TextArea';
-import { DateInput, TimeInput } from '../shared/ui';
+import { DateInput, PasswordInput, TimeInput } from '../shared/ui';
 
 function App() {
-	const [value, setValue] = useState('');
-	return (
-		<div>
-			<TimeInput
-				value={value}
-				onChange={(newValue: string) => {
-					setValue(newValue);
-				}}
-			/>
-		</div>
-	);
+	return <div></div>;
 }
 
 export default App;
