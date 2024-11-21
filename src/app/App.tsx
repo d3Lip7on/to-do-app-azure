@@ -1,9 +1,15 @@
-import { useState } from 'react';
-import { TextArea } from '../shared/ui/TextArea';
-import { DateInput, PasswordInput, TimeInput } from '../shared/ui';
+import { Canvas, MainButton } from '../shared/ui';
+import { SelectColor } from '../features/SelectColor';
 
 function App() {
-	return <div></div>;
+	return (
+		<div>
+			<Canvas width="1000px">
+				<SelectColor />
+				<MainButton>Create</MainButton>
+			</Canvas>
+		</div>
+	);
 }
 
 export default App;
