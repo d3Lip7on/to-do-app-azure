@@ -6,22 +6,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-span,
-a,
-strong,
-em,
-li,
-td,
-th,
-label {
 	font-family: Arial, sans-serif;
+	font-weight: 400;
+	color: black;
 }
