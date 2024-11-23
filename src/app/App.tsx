@@ -1,9 +1,9 @@
-import { CreateTask } from '../features/create-task/ui/CreateTask';
+import { EditTask } from '../features/edit-task/ui/EditTask';
 
 function App() {
 	return (
 		<div>
-			<CreateTask />
+			<EditTask />
 		</div>
 	);
 }
