@@ -1,5 +1,11 @@
+import { CreateTask } from '../features/CreateTask';
+
 function App() {
-	return <div></div>;
+	return (
+		<div>
+			<CreateTask />
+		</div>
+	);
 }
 
 export default App;
