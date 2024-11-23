@@ -1,7 +1,8 @@
-export { TextInput } from './TextInput';
+export { TextInput } from './inputs/TextInput';
 export { MainButton } from './MainButton';
-export { DateInput } from './DateInput';
-export { TimeInput } from './TimeInput';
-export { PasswordInput } from './PasswordInput';
-export { TextArea } from './TextArea';
+export { DateInput } from './inputs/DateInput';
+export { TimeInput } from './inputs/TimeInput';
+export { PasswordInput } from './inputs/PasswordInput';
+export { TextArea } from './inputs/TextArea';
 export { Canvas } from './Canvas';
+export { FormTitle } from './FormTitle';
