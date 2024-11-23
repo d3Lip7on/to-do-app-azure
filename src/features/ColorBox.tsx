@@ -10,7 +10,7 @@ export function ColorBox({ color, isActive, onClick }: ColorBoxProps) {
 			onClick={() => {
 				onClick();
 			}}
-			className="w-[64px] h-[64px] transition-transform duration-200 ease-in-out hover:scale-105 "
+			className="w-[64px] h-[64px] transition-transform duration-200 ease-in-out hover:scale-105 cursor-pointer "
 			style={{ background: color, border: isActive ? '2px solid black' : 'none' }}
 		></div>
 	);

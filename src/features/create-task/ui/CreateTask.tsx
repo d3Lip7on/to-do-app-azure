@@ -14,13 +14,15 @@ export function CreateTask() {
 	}
 	return (
 		<div>
-			<Canvas width="1032px">
+			<Canvas width="774px">
 				<div className="flex justify-center items-center relative">
-					<h1 className="text-[64px] font-bold">New task</h1>
+					<h1 className="text-[48px] font-bold">New task</h1>
 					<CloseButton onClick={() => console.log('Closed window')} />
 				</div>
 
-				<FormTitle>Title</FormTitle>
+				<div className="pl-[15px]">
+					<FormTitle>Title</FormTitle>
+				</div>
 				<TextInput
 					onChange={(newValue) => {
 						setTextInputState(newValue);
@@ -30,7 +32,9 @@ export function CreateTask() {
 				/>
 
 				<div className="flex flex-col">
-					<FormTitle>Description</FormTitle>
+					<div className="pl-[15px]">
+						<FormTitle>Description</FormTitle>
+					</div>
 					<TextArea
 						onChange={(newValue) => {
 							setTextAreaState(newValue);
@@ -38,9 +42,11 @@ export function CreateTask() {
 						value={textAreaState}
 					/>
 				</div>
-				<div className="flex gap-[10px]">
+				<div className="flex gap-[7px]">
 					<div className="flex flex-col w-[100%]	">
-						<FormTitle>Date</FormTitle>
+						<div className="pl-[15px]">
+							<FormTitle>Date</FormTitle>
+						</div>
 
 						<DateInput
 							onChange={(newValue) => {
@@ -50,7 +56,9 @@ export function CreateTask() {
 						/>
 					</div>
 					<div className="flex flex-col w-[100%] ">
-						<FormTitle>Time</FormTitle>
+						<div className="pl-[15px]">
+							<FormTitle>Time</FormTitle>
+						</div>
 						<TimeInput
 							onChange={(newValue) => {
 								setTextTimeState(newValue);
@@ -59,7 +67,9 @@ export function CreateTask() {
 						/>
 					</div>
 				</div>
-				<FormTitle>Color</FormTitle>
+				<div className="pl-[15px]">
+					<FormTitle>Color</FormTitle>
+				</div>
 				<SelectColor onClick={clickHandler} activeIndex={activeIndex} />
 				<MainButton
 					color="FBF868"
