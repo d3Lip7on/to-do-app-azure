@@ -17,6 +17,7 @@ export function SelectColor({ activeIndex, onClick }: SelectColorProps) {
 							onClick(index);
 						}}
 						color={color}
+						key={color}
 					/>
 				);
 			})}

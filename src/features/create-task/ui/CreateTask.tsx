@@ -9,9 +9,7 @@ export function CreateTask() {
 	const [textAreaState, setTextAreaState] = useState<string>('');
 	const [textDateState, setTextDateState] = useState<string>('');
 	const [textTimeState, setTextTimeState] = useState<string>('');
-	function clickHandler(index: number) {
-		setActiveIndex(index);
-	}
+	const activeColor: string = activeIndex != null ? colors[activeIndex] : 'null';
 	return (
 		<div>
 			<Canvas width="774px">
@@ -70,11 +68,16 @@ export function CreateTask() {
 				<div className="pl-[15px]">
 					<FormTitle>Color</FormTitle>
 				</div>
-				<SelectColor onClick={clickHandler} activeIndex={activeIndex} />
+				<SelectColor
+					onClick={(index: number) => {
+						setActiveIndex(index);
+					}}
+					activeIndex={activeIndex}
+				/>
 				<MainButton
 					color="FBF868"
 					onClick={() => {
-						console.log(`Задача : ${textInputState} , описание задачи: ${textAreaState} , дата : ${textDateState} , время : ${textTimeState} , цвет задачи : ${activeIndex != null ? colors[activeIndex] : 'null'}  `);
+						console.log(textInputState, textAreaState, textDateState, textTimeState, activeColor);
 					}}
 				>
 					Create
