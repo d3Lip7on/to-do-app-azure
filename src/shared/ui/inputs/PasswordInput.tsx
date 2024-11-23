@@ -13,14 +13,14 @@ export function PasswordInput({ onChange, value }: PasswordInputProps) {
 			<input
 				type={isPasswordVisible ? 'text' : 'password'}
 				placeholder="Enter your password"
-				className="block w-full p-5 bg-form-input-background placeholder:text-form-input-placeholder text-form-input-text  placeholder:italic text-[40px]"
+				className="block w-full p-[15px] bg-form-input-background placeholder:text-form-input-placeholder text-form-input-text  placeholder:italic text-[30px]"
 				value={value}
 				onChange={(event) => {
 					onChange(event.currentTarget.value);
 				}}
 			/>
 			<button
-				className="absolute right-[20px] top-[50%] translate-y-[-50%]"
+				className="absolute right-[15px] top-[50%] translate-y-[-50%]"
 				onClick={() => {
 					setPasswordVisibility(!isPasswordVisible);
 				}}

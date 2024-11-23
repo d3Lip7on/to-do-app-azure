@@ -11,7 +11,7 @@ export function TimeInput({ value, onChange }: TimeInputProps) {
 				onChange(event.currentTarget.value);
 			}}
 			type="time"
-			className="block w-full p-5 bg-form-input-background placeholder:text-form-input-placeholder text-form-input-text placeholder:italic text-[40px]"
+			className="block w-full p-[15px] bg-form-input-background placeholder:text-form-input-placeholder text-form-input-text placeholder:italic text-[30px]"
 		/>
 	);
 }
