@@ -13,7 +13,7 @@ export function PasswordInput({ onChange, value }: PasswordInputProps) {
 			<input
 				type={isPasswordVisible ? 'text' : 'password'}
 				placeholder="Enter your password"
-				className="block w-full p-5 bg-[#E3E3E3] placeholder:text-[#858585] placeholder:italic text-black text-[40px]"
+				className="block w-full p-5 bg-form-input-background placeholder:text-form-input-placeholder text-form-input-text  placeholder:italic text-[40px]"
 				value={value}
 				onChange={(event) => {
 					onChange(event.currentTarget.value);
