@@ -11,7 +11,10 @@ type ColorSchemeType = {
 	form: {
 		text: string;
 		background: string;
-		placeholder: string;
+		placeholder: {
+			text: string;
+			background: string;
+		};
 	};
 };
 
@@ -28,7 +31,10 @@ export const colorScheme: ColorSchemeType = {
 	form: {
 		background: '#FFFFFF',
 		text: '#000000',
-		placeholder: '#858585',
+		placeholder: {
+			background: '#E3E3E3',
+			text: '#858585',
+		},
 	},
 };
 
