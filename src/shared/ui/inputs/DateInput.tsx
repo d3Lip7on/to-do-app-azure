@@ -11,7 +11,7 @@ export function DateInput({ value, onChange }: DateInputProps) {
 				onChange(event.currentTarget.value);
 			}}
 			type="date"
-			className="block w-full p-5 bg-[#E3E3E3] placeholder:text-[#858585] placeholder:italic text-black text-[40px]"
+			className="block w-full p-5 bg-[#E3E3E3] placeholder:text-form-placeholder placeholder:italic text-black text-[40px]"
 		/>
 	);
 }
