@@ -1,4 +1,4 @@
-import { CreateTask } from '../features/CreateTask';
+import { CreateTask } from '../features/create-task/ui/CreateTask';
 
 function App() {
 	return (

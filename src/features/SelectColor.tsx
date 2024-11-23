@@ -1,4 +1,4 @@
-import { colors } from './model/data/colors';
+import { colors } from './create-task/ui/model/data/colors';
 import { ColorBox } from './ColorBox';
 
 type SelectColorProps = {
