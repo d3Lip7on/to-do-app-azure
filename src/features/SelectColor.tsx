@@ -1,4 +1,4 @@
-import { colors } from './model/data/colors';
+import { colors } from './create-task/ui/model/data/colors';
 import { ColorBox } from './ColorBox';
 
 type SelectColorProps = {
@@ -17,6 +17,7 @@ export function SelectColor({ activeIndex, onClick }: SelectColorProps) {
 							onClick(index);
 						}}
 						color={color}
+						key={color}
 					/>
 				);
 			})}
