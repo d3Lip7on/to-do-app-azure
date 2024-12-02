@@ -7,7 +7,7 @@ export function CreateTask() {
 	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useContext(FormContext);
 	return (
 		<Canvas width="774px">
-			<TaskWindow />
+			<TaskWindow title="New Task" />
 			<MainButton
 				onClick={() => {
 					console.log(textInputState, textAreaState, textDateState, textTimeState, activeColor);

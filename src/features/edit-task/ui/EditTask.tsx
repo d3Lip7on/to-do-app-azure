@@ -7,7 +7,7 @@ export function EditTask() {
 	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useContext(FormContext);
 	return (
 		<Canvas width="774px">
-			<TaskWindow />
+			<TaskWindow title="Edit Task" />
 			<div className="flex gap-[7px]">
 				<MainButton
 					onClick={() => {

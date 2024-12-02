@@ -1,6 +1,14 @@
 import { createContext, useState } from 'react';
 import { colors } from '../../features/create-task/ui/model/data/colors';
 
+interface Data {
+	indexValue: number | null;
+	inputValue: string;
+	areaValue: string;
+	dateValue: string;
+	timeValue: string;
+}
+
 interface FormContextType {
 	activeIndex: number | null;
 	setActiveIndex: (index: number | null) => void;
@@ -29,12 +37,12 @@ export const FormContext = createContext<FormContextType>({
 	activeColor: 'null',
 });
 
-export const FormProvider = ({ children }: { children: React.ReactNode }) => {
-	const [activeIndex, setActiveIndex] = useState<number | null>(null);
-	const [textInputState, setTextInputState] = useState<string>('');
-	const [textAreaState, setTextAreaState] = useState<string>('');
-	const [textDateState, setTextDateState] = useState<string>('');
-	const [textTimeState, setTextTimeState] = useState<string>('');
+export const FormProvider = ({ children, data }: { children: React.ReactNode; data?: Data }) => {
+	const [activeIndex, setActiveIndex] = useState<number | null>(data ? data.indexValue : null);
+	const [textInputState, setTextInputState] = useState<string>(data ? data.inputValue : '');
+	const [textAreaState, setTextAreaState] = useState<string>(data ? data.areaValue : '');
+	const [textDateState, setTextDateState] = useState<string>(data ? data.dateValue : '');
+	const [textTimeState, setTextTimeState] = useState<string>(data ? data.timeValue : '');
 	const activeColor: string = activeIndex != null ? colors[activeIndex] : 'null';
 
 	return (

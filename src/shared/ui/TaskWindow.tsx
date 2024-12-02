@@ -3,7 +3,7 @@ import { FormTitle, TextInput, TextArea, DateInput, TimeInput } from './index';
 import { SelectColor, CloseButton } from '../../features/index';
 import { FormContext } from './FormContext';
 
-export function TaskWindow() {
+export function TaskWindow({ title }: { title: string }) {
 	const {
 		activeIndex,
 		setActiveIndex,
@@ -20,7 +20,7 @@ export function TaskWindow() {
 	return (
 		<div>
 			<div className="flex justify-center items-center relative">
-				<h1 className="text-[48px] font-bold">New task</h1>
+				<h1 className="text-[48px] font-bold">{title}</h1>
 				<CloseButton onClick={() => console.log('Closed window')} />
 			</div>
 
