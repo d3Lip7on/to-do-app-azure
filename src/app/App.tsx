@@ -12,7 +12,7 @@ const data = {
 	timeValue: '443',
 };
 function App() {
-	return <Page />;
+	return <EditTask />;
 }
 
 export default App;

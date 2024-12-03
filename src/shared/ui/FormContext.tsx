@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { colors } from '../../features/create-task/ui/model/data/colors';
+import { colors } from '../../features/create-task/model/data/colors';
 
 interface Data {
 	indexValue: number | null;

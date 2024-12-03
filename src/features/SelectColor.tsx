@@ -1,5 +1,5 @@
-import { colors } from './create-task/ui/model/data/colors';
 import { ColorBox } from './ColorBox';
+import { colors } from './create-task/model/data/colors';
 
 type SelectColorProps = {
 	activeIndex: number | null;
