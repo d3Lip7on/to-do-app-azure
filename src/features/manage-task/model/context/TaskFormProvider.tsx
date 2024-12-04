@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react';
-import { colors } from '../../features/create-task/model/data/colors';
+import { colors } from '../data/colors';
 
-interface Data {
+export interface TaskData {
 	indexValue: number | null;
 	inputValue: string;
 	areaValue: string;
@@ -9,7 +9,7 @@ interface Data {
 	timeValue: string;
 }
 
-interface FormContextType {
+interface TaskFormContextType {
 	activeIndex: number | null;
 	setActiveIndex: (index: number | null) => void;
 	textInputState: string;
@@ -23,7 +23,7 @@ interface FormContextType {
 	activeColor: string;
 }
 
-export const FormContext = createContext<FormContextType>({
+export const TaskFormContext = createContext<TaskFormContextType>({
 	activeIndex: null,
 	setActiveIndex: () => {},
 	textInputState: '',
@@ -37,16 +37,16 @@ export const FormContext = createContext<FormContextType>({
 	activeColor: 'null',
 });
 
-export const FormProvider = ({ children, data }: { children: React.ReactNode; data?: Data }) => {
-	const [activeIndex, setActiveIndex] = useState<number | null>(data ? data.indexValue : null);
-	const [textInputState, setTextInputState] = useState<string>(data ? data.inputValue : '');
-	const [textAreaState, setTextAreaState] = useState<string>(data ? data.areaValue : '');
-	const [textDateState, setTextDateState] = useState<string>(data ? data.dateValue : '');
-	const [textTimeState, setTextTimeState] = useState<string>(data ? data.timeValue : '');
+export const TaskFormProvider = ({ children, initialData }: { children: React.ReactNode; initialData?: TaskData }) => {
+	const [activeIndex, setActiveIndex] = useState<number | null>(initialData ? initialData.indexValue : null);
+	const [textInputState, setTextInputState] = useState<string>(initialData ? initialData.inputValue : '');
+	const [textAreaState, setTextAreaState] = useState<string>(initialData ? initialData.areaValue : '');
+	const [textDateState, setTextDateState] = useState<string>(initialData ? initialData.dateValue : '');
+	const [textTimeState, setTextTimeState] = useState<string>(initialData ? initialData.timeValue : '');
 	const activeColor: string = activeIndex != null ? colors[activeIndex] : 'null';
 
 	return (
-		<FormContext.Provider
+		<TaskFormContext.Provider
 			value={{
 				activeIndex,
 				setActiveIndex,
@@ -62,6 +62,6 @@ export const FormProvider = ({ children, data }: { children: React.ReactNode; da
 			}}
 		>
 			{children}
-		</FormContext.Provider>
+		</TaskFormContext.Provider>
 	);
 };

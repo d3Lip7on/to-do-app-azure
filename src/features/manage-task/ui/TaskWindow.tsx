@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { FormTitle, TextInput, TextArea, DateInput, TimeInput } from './index';
-import { SelectColor, CloseButton } from '../../features/index';
-import { FormContext } from './FormContext';
+import { FormTitle, TextInput, TextArea, DateInput, TimeInput, CloseButton } from '../../../shared/ui/index';
+import { TaskFormContext } from '../model/context/TaskFormProvider';
+import { SelectColor } from './SelectColor';
 
 export function TaskWindow({ title }: { title: string }) {
 	const {
@@ -15,7 +15,7 @@ export function TaskWindow({ title }: { title: string }) {
 		setTextDateState,
 		textTimeState,
 		setTextTimeState,
-	} = useContext(FormContext);
+	} = useContext(TaskFormContext);
 
 	return (
 		<div>

@@ -7,5 +7,5 @@ export { TextArea } from './inputs/TextArea';
 export { Modal } from './Modal';
 export { FormTitle } from './FormTitle';
 export { Canvas } from './Canvas';
-export { FormContext } from './FormContext';
-export { TaskWindow } from './TaskWindow';
+export { TaskWindow } from '../../features/manage-task/ui/TaskWindow';
+export { CloseButton } from './CloseButton';

@@ -1,6 +1,7 @@
-import { Page } from '../page/Page';
+import { TaskModal } from '../features/manage-task';
+
 function App() {
-	return <Page />;
+	return <TaskModal mode={'edit'} isOpen={true} onClose={() => {}} onDelete={() => {}} onSubmit={() => {}} />;
 }
 
 export default App;
