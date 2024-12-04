@@ -1,6 +1,6 @@
 // TaskModal.tsx
 import { Modal } from '../../../../shared/ui';
-import { AuthFormProvider } from '../../model/context/AuthFormProvider';
+import { AuthFormProvider } from '../model/context/AuthFormProvider';
 import { SignUpForm } from './SignUpForm';
 
 type AuthModalProps = {
