@@ -1,7 +1,17 @@
-import { TaskModal } from '../features/manage-task';
+import { SignUpModal } from '../features/auth/sign-up';
 
 function App() {
-	return <TaskModal mode={'edit'} isOpen={true} onClose={() => {}} onDelete={() => {}} onSubmit={() => {}} />;
+	return (
+		<SignUpModal
+			isOpen={true}
+			onClose={() => {
+				console.log('closed');
+			}}
+			onSubmit={() => {
+				console.log();
+			}}
+		/>
+	);
 }
 
 export default App;
