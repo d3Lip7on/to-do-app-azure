@@ -38,7 +38,7 @@ export const TaskFormContext = createContext<TaskFormContextType>({
 });
 
 export const TaskFormProvider = ({ children, initialData }: { children: React.ReactNode; initialData?: TaskData }) => {
-	const [activeIndex, setActiveIndex] = useState<number | null>(initialData ? initialData.indexValue : null);
+	const [activeIndex, setActiveIndex] = useState<number | null>(initialData ? initialData.indexValue : 0);
 	const [textInputState, setTextInputState] = useState<string>(initialData ? initialData.inputValue : '');
 	const [textAreaState, setTextAreaState] = useState<string>(initialData ? initialData.areaValue : '');
 	const [textDateState, setTextDateState] = useState<string>(initialData ? initialData.dateValue : '');
