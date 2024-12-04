@@ -1,36 +1,20 @@
 import { MainButton, Canvas } from '../../../../shared/ui';
 import { SignUpWindow } from './SignUpWindow';
 import { useContext } from 'react';
-import { AuthFormContext } from '../../model/context/AuthFormProvider';
+import { AuthFormContext } from '../model/context/AuthFormProvider';
+import { validateEmail, validateInput, validatePassword } from '../model/utilities/ValidateRegistration';
 
 type SignUpFormProps = {
 	onSubmit: () => void;
 	onClose: () => void;
 };
 
-export function SignUpForm({ onSubmit, onClose }: SignUpFormProps) {
-	const { emailInputState, passwordInputState, confirmPasswordInputState } = useContext(AuthFormContext);
-	function checkingEmail(email: string) {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return emailRegex.test(email);
-	}
-	function validatePassword(X: string, Y: string) {
-		if (X == Y) {
-			console.log('password validation success');
-			return X;
-		} else {
-			alert('wrong password');
-		}
-	}
-	function validateEmail(email: string) {
-		if (checkingEmail(email)) {
-			console.log('email validation success');
-			return email;
-		} else {
-			alert('wrong email');
-		}
-	}
-	const handleSignUp = () => {
+export function SignUpForm({ onClose, onSubmit }: SignUpFormProps) {
+	const { usernameInputState, emailInputState, passwordInputState, confirmPasswordInputState } =
+		useContext(AuthFormContext);
+
+	const validate = () => {
+		validateInput(usernameInputState, emailInputState, passwordInputState, confirmPasswordInputState);
 		validateEmail(emailInputState);
 		validatePassword(passwordInputState, confirmPasswordInputState);
 	};
@@ -38,7 +22,19 @@ export function SignUpForm({ onSubmit, onClose }: SignUpFormProps) {
 	return (
 		<Canvas width="570px">
 			<SignUpWindow onClose={onClose} />
-			<MainButton onClick={handleSignUp}>Sign Up</MainButton>
+			<MainButton
+				onClick={() => {
+					try {
+						validate();
+					} catch (error) {
+						alert(error);
+					}
+
+					onSubmit();
+				}}
+			>
+				Sign Up
+			</MainButton>
 		</Canvas>
 	);
 }
