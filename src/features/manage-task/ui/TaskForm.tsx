@@ -1,7 +1,8 @@
 import { useContext } from 'react';
-import { MainButton, TaskWindow } from '../../../shared/ui';
+import { MainButton } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
+import { TaskWindow } from './TaskWindow';
 
 type ModeType = 'create' | 'edit';
 
