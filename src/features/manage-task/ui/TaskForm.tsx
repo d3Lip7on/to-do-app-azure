@@ -35,7 +35,9 @@ export function TaskForm({ mode }: TaskFormProps) {
 
 	const handleCreate = () => {
 		// TODO: handle this case
-		console.log(textInputState, textAreaState, textDateState, textTimeState, activeColor);
+		textInputState === ''
+			? alert('Enter title!')
+			: console.log(textInputState, textAreaState, textDateState, textTimeState, activeColor);
 	};
 
 	const handleDelete = () => {
