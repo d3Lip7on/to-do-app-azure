@@ -3,15 +3,16 @@ import { TaskType } from '../model/types/TaskType';
 
 type TaskCardProps = {
 	task: TaskType;
+	onEdit: (task: TaskType) => void;
 };
 
-export function TaskCard({ task }: TaskCardProps) {
+export function TaskCard({ task, onEdit }: TaskCardProps) {
 	return (
 		<div>
 			{task.due != null && <h3 className="pl-[15px] text-[27px] text-text-secondary leading-[27px]">{getDayMonthYearFromDate(task.due)}</h3>}
 
 			<div
-				className="max-w-[774px] text-text-primary"
+				className=" text-text-primary"
 				style={{
 					background: task.color,
 				}}
@@ -25,7 +26,11 @@ export function TaskCard({ task }: TaskCardProps) {
 						<p className="text-[18px]">{task.description}</p>
 					</div>
 					<div className="flex flex-col justify-between items-end flex-shrink-0">
-						<button>
+						<button
+							onClick={() => {
+								onEdit(task);
+							}}
+						>
 							<img src="/icons/edit.svg" className="w-[24px] h-[24px]" alt="edit task" />
 						</button>
 						{task.due != null && task.hasTime && <p className="text-[18px]">due {getTimeFromDate(task.due)}</p>}
