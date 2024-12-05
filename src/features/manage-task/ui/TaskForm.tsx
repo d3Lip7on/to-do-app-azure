@@ -47,7 +47,7 @@ export function TaskForm({ mode }: TaskFormProps) {
 		<Canvas width="774px">
 			<TaskWindow title={title} />
 			<div className="flex gap-[7px]">
-				<MainButton onClick={handleCreate}>{mode === 'create' ? 'Create' : 'Update'}</MainButton>
+				<MainButton onClick={handleCreate}>{mode === 'create' ? 'Create' : 'Save'}</MainButton>
 				{mode === 'edit' && (
 					<MainButton color="#FB686A" onClick={handleDelete}>
 						Delete

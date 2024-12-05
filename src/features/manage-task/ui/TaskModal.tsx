@@ -18,10 +18,7 @@ export function TaskModal({ mode, isOpen, onClose, initialData, onSubmit, onDele
 	return (
 		<Modal>
 			<TaskFormProvider initialData={initialData}>
-				<div>
-					<button onClick={onClose}>Close</button>
-					<TaskForm mode={mode} onSubmit={onSubmit} onDelete={onDelete} />
-				</div>
+				<TaskForm mode={mode} onSubmit={onSubmit} onDelete={onDelete} />
 			</TaskFormProvider>
 		</Modal>
 	);
