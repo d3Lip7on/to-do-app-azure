@@ -1,27 +1,26 @@
 import { MainButton, Canvas } from '../../../../shared/ui';
-import { SignUpWindow } from './SignUpWindow';
+import { LogInWindow } from './LogInWindow';
 import { useContext } from 'react';
 import { AuthFormContext } from '../../model/context/AuthFormProvider';
 import { validateEmail, validateInput, validatePassword } from '../../model/utilities/ValidateRegistration';
 
-type SignUpFormProps = {
+type LogInFormProps = {
 	onSubmit: () => void;
 	onClose: () => void;
 };
 
-export function SignUpForm({ onClose, onSubmit }: SignUpFormProps) {
-	const { usernameInputState, emailInputState, passwordInputState, confirmPasswordInputState } =
-		useContext(AuthFormContext);
+export function LogInForm({ onClose, onSubmit }: LogInFormProps) {
+	const { emailInputState, passwordInputState } = useContext(AuthFormContext);
 
 	const validate = () => {
-		validateInput(emailInputState, passwordInputState, confirmPasswordInputState);
+		validateInput(emailInputState, passwordInputState);
 		validateEmail(emailInputState);
 		validatePassword(passwordInputState);
 	};
 
 	return (
 		<Canvas width="570px">
-			<SignUpWindow onClose={onClose} />
+			<LogInWindow onClose={onClose} />
 			<MainButton
 				onClick={() => {
 					try {
@@ -33,7 +32,7 @@ export function SignUpForm({ onClose, onSubmit }: SignUpFormProps) {
 					onSubmit();
 				}}
 			>
-				Sign Up
+				Log In
 			</MainButton>
 		</Canvas>
 	);

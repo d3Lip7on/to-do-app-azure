@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AuthFormContext } from '../model/context/AuthFormProvider';
+import { AuthFormContext } from '../../model/context/AuthFormProvider';
 import { TextInput, PasswordInput, CloseButton, FormTitle } from '../../../../shared/ui/index';
 
 export function SignUpWindow({ onClose }: { onClose: () => void }) {

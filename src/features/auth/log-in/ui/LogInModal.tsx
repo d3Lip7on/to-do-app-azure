@@ -1,7 +1,7 @@
 // TaskModal.tsx
 import { Modal } from '../../../../shared/ui';
 import { AuthFormProvider } from '../../model/context/AuthFormProvider';
-import { SignUpForm } from './SignUpForm';
+import { LogInForm } from './LogInForm';
 
 type AuthModalProps = {
 	isOpen: boolean;
@@ -9,13 +9,13 @@ type AuthModalProps = {
 	onSubmit: () => void;
 };
 
-export function SignUpModal({ isOpen, onClose, onSubmit }: AuthModalProps) {
+export function LogInModal({ isOpen, onClose, onSubmit }: AuthModalProps) {
 	if (!isOpen) return null;
 
 	return (
 		<Modal>
 			<AuthFormProvider>
-				<SignUpForm onSubmit={onSubmit} onClose={onClose} />
+				<LogInForm onSubmit={onSubmit} onClose={onClose} />
 			</AuthFormProvider>
 		</Modal>
 	);
