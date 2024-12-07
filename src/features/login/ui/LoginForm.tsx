@@ -1,16 +1,16 @@
-import { MainButton, Canvas } from '../../../../shared/ui';
-import { LogInWindow } from './LogInWindow';
 import { useContext } from 'react';
-import { AuthFormContext } from '../../model/context/AuthFormProvider';
-import { validateEmail, validateInput, validatePassword } from '../../model/utilities/ValidateRegistration';
+import { LoginFormContext } from '../model/context/LoginFormProvider';
+import { Canvas, MainButton } from '../../../shared/ui';
+import { validateInput, validateEmail, validatePassword } from '../../../shared/utilities/ValidateRegistration';
+import { LoginWindow } from './LogInWindow';
 
 type LogInFormProps = {
 	onSubmit: () => void;
 	onClose: () => void;
 };
 
-export function LogInForm({ onClose, onSubmit }: LogInFormProps) {
-	const { emailInputState, passwordInputState } = useContext(AuthFormContext);
+export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
+	const { emailInputState, passwordInputState } = useContext(LoginFormContext);
 
 	const validate = () => {
 		validateInput(emailInputState, passwordInputState);
@@ -20,7 +20,7 @@ export function LogInForm({ onClose, onSubmit }: LogInFormProps) {
 
 	return (
 		<Canvas width="570px">
-			<LogInWindow onClose={onClose} />
+			<LoginWindow onClose={onClose} />
 			<MainButton
 				onClick={() => {
 					try {

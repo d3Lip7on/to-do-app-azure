@@ -1,11 +1,9 @@
 import { useContext } from 'react';
-import { AuthFormContext } from '../../model/context/AuthFormProvider';
-import { TextInput, PasswordInput, CloseButton, FormTitle } from '../../../../shared/ui/index';
-import { error } from 'console';
+import { CloseButton, FormTitle, TextInput, PasswordInput } from '../../../shared/ui';
+import { LoginFormContext } from '../model/context/LoginFormProvider';
 
-export function LogInWindow({ onClose }: { onClose: () => void }) {
-	const { emailInputState, setEmailInputState, passwordInputState, setPasswordInputState } =
-		useContext(AuthFormContext);
+export function LoginWindow({ onClose }: { onClose: () => void }) {
+	const { emailInputState, setEmailInputState, passwordInputState, setPasswordInputState } = useContext(LoginFormContext);
 	const isError = true;
 	return (
 		<div>

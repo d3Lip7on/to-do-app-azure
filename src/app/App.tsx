@@ -1,4 +1,4 @@
-import { LogInModal } from '../features/auth/log-in';
+import { LogInModal } from '../features/login';
 
 function App() {
 	return (

@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-interface AuthFormContextType {
+interface RegisterFormContextType {
 	usernameInputState: string;
 	setUsernameInputState: (index: string) => void;
 	emailInputState: string;
@@ -11,7 +11,7 @@ interface AuthFormContextType {
 	setConfirmPasswordInputState: (index: string) => void;
 }
 
-export const AuthFormContext = createContext<AuthFormContextType>({
+export const RegisterFormContext = createContext<RegisterFormContextType>({
 	usernameInputState: '',
 	setUsernameInputState: () => {},
 	emailInputState: '',
@@ -22,14 +22,14 @@ export const AuthFormContext = createContext<AuthFormContextType>({
 	setConfirmPasswordInputState: () => {},
 });
 
-export const AuthFormProvider = ({ children }: { children: React.ReactNode }) => {
+export const RegisterFormProvider = ({ children }: { children: React.ReactNode }) => {
 	const [usernameInputState, setUsernameInputState] = useState<string>('');
 	const [emailInputState, setEmailInputState] = useState<string>('');
 	const [passwordInputState, setPasswordInputState] = useState<string>('');
 	const [confirmPasswordInputState, setConfirmPasswordInputState] = useState<string>('');
 
 	return (
-		<AuthFormContext.Provider
+		<RegisterFormContext.Provider
 			value={{
 				usernameInputState,
 				setUsernameInputState,
@@ -42,6 +42,6 @@ export const AuthFormProvider = ({ children }: { children: React.ReactNode }) =>
 			}}
 		>
 			{children}
-		</AuthFormContext.Provider>
+		</RegisterFormContext.Provider>
 	);
 };

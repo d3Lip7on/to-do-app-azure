@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { AuthFormContext } from '../../model/context/AuthFormProvider';
-import { TextInput, PasswordInput, CloseButton, FormTitle } from '../../../../shared/ui/index';
+import { RegisterFormContext } from '../model/context/RegisterFormProvider';
+import { TextInput, PasswordInput, CloseButton, FormTitle } from '../../../shared/ui/index';
 
-export function SignUpWindow({ onClose }: { onClose: () => void }) {
+export function RegisterWindow({ onClose }: { onClose: () => void }) {
 	const {
 		usernameInputState,
 		setUsernameInputState,
@@ -12,7 +12,7 @@ export function SignUpWindow({ onClose }: { onClose: () => void }) {
 		setPasswordInputState,
 		confirmPasswordInputState,
 		setConfirmPasswordInputState,
-	} = useContext(AuthFormContext);
+	} = useContext(RegisterFormContext);
 
 	return (
 		<div>
