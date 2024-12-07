@@ -4,14 +4,11 @@ import { RegisterFormProvider } from '../model/context/RegisterFormProvider';
 import { RegisterForm } from './RegisterForm';
 
 type AuthModalProps = {
-	isOpen: boolean;
 	onClose: () => void;
 	onSubmit: () => void;
 };
 
-export function RegisterModal({ isOpen, onClose, onSubmit }: AuthModalProps) {
-	if (!isOpen) return null;
-
+export function RegisterModal({ onClose, onSubmit }: AuthModalProps) {
 	return (
 		<Modal>
 			<RegisterFormProvider>
