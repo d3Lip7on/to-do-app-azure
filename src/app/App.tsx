@@ -1,8 +1,8 @@
-import { LogInModal } from '../features/login';
+import { LoginModal } from '../features/login';
 
 function App() {
 	return (
-		<LogInModal
+		<LoginModal
 			isOpen={true}
 			onClose={() => {
 				console.log('closed');

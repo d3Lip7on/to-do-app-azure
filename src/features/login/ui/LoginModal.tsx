@@ -1,6 +1,6 @@
 import { Modal } from '../../../shared/ui';
 import { LoginFormProvider } from '../model/context/LoginFormProvider';
-import { LoginForm } from './LogInForm';
+import { LoginForm } from './LoginForm';
 
 type AuthModalProps = {
 	isOpen: boolean;

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { LoginFormContext } from '../model/context/LoginFormProvider';
 import { Canvas, MainButton } from '../../../shared/ui';
 import { validateInput, validateEmail, validatePassword } from '../../../shared/utilities/ValidateRegistration';
-import { LoginWindow } from './LogInWindow';
+import { LoginWindow } from './LoginWindow';
 
 type LogInFormProps = {
 	onSubmit: () => void;
