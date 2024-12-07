@@ -41,4 +41,13 @@ export const tasks: Array<TaskType> = [
 		isDone: false,
 		due: new Date('2024-12-12T13:30'),
 	},
+	{
+		title: 'Сделать домашку',
+		description: 'Ебал я делать єту дамашку но мама гарит что нада ибо сдохну',
+		color: '#FBF868',
+		hasTime: true,
+		id: '155',
+		isDone: false,
+		due: new Date('2024-03-15T13:56'),
+	},
 ];
