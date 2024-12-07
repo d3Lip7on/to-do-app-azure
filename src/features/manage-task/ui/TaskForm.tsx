@@ -10,6 +10,7 @@ type TaskFormProps = {
 	mode: ModeType;
 	onSubmit: () => void;
 	onDelete: () => void;
+	onClose: () => void;
 };
 
 function useFormState() {
@@ -28,7 +29,7 @@ function getTaskTitle(mode: ModeType): string {
 	}
 }
 
-export function TaskForm({ mode }: TaskFormProps) {
+export function TaskForm({ mode, onClose }: TaskFormProps) {
 	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useFormState();
 
 	const title = getTaskTitle(mode);
@@ -47,7 +48,7 @@ export function TaskForm({ mode }: TaskFormProps) {
 
 	return (
 		<Canvas width="774px">
-			<TaskWindow title={title} />
+			<TaskWindow onClose={onClose} title={title} />
 			<div className="flex gap-[7px]">
 				<MainButton onClick={handleCreate}>{mode === 'create' ? 'Create' : 'Save'}</MainButton>
 				{mode === 'edit' && (
