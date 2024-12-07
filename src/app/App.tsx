@@ -1,16 +1,11 @@
-import { LoginModal } from '../features/login';
+import { Page } from '../page/Page';
+import { AuthProvider } from './providers/AuthProvider';
 
 function App() {
 	return (
-		<LoginModal
-			isOpen={true}
-			onClose={() => {
-				console.log('closed');
-			}}
-			onSubmit={() => {
-				console.log();
-			}}
-		/>
+		<AuthProvider>
+			<Page />
+		</AuthProvider>
 	);
 }
 

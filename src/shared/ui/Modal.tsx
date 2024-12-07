@@ -6,8 +6,8 @@ type ModalProps = {
 
 export function Modal({ children }: ModalProps) {
 	return (
-		<div className="absolute bg-text-primary/70">
-			<div className="flex justify-center items-center w-[100vw] h-[100vh]">{children}</div>
+		<div className="absolute top-0 left-0 bottom-0 right-0 bg-text-primary/70">
+			<div className="flex justify-center items-center w-full h-full">{children}</div>
 		</div>
 	);
 }
