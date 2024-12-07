@@ -1,4 +1,4 @@
-import { BASE_URL } from '../../../shared/api/api';
+import { BASE_URL } from '../../../shared/api';
 
 type RegisterUserParams = {
 	username: string;
