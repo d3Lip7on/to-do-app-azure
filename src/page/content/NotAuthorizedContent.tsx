@@ -28,7 +28,9 @@ export function NotAuthorizedContent() {
 					onClose={() => {
 						setRegisterFormOpen(false);
 					}}
-					onSubmit={() => {}}
+					onSubmit={() => {
+						setRegisterFormOpen(false);
+					}}
 				/>
 			)}
 		</div>

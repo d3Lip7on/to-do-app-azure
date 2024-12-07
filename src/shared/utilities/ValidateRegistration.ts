@@ -10,13 +10,13 @@ export function validateInput(...text: Array<string>) {
 		}
 	});
 }
-export function validatePassword(pass1: string, pass2?: string) {
-	if (pass1 !== pass2) {
-		throw new Error('Wrong password');
+export function validatePassword(pass1: string, pass2: string) {
+	if (pass1.length < 5) {
+		throw new Error('Short password');
 	}
 
-	if (pass1.length < 5 && pass2.length < 5) {
-		throw new Error('Short password');
+	if (pass1 !== pass2) {
+		throw new Error('Wrong password');
 	}
 }
 export function validateEmail(email: string) {
