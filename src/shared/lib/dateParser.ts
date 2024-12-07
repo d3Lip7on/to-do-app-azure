@@ -1,4 +1,4 @@
-function normalizeDateNumber(number: Number): string {
+export function normalizeDateNumber(number: Number): string {
 	return number.toString().length === 1 ? `0${number}` : number.toString();
 }
 

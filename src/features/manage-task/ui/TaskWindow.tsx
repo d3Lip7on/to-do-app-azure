@@ -3,7 +3,7 @@ import { FormTitle, TextInput, TextArea, DateInput, TimeInput, CloseButton } fro
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { SelectColor } from './SelectColor';
 
-export function TaskWindow({ title }: { title: string }) {
+export function TaskWindow({ title, onClose }: { title: string; onClose: () => void }) {
 	const {
 		activeIndex,
 		setActiveIndex,
@@ -21,7 +21,7 @@ export function TaskWindow({ title }: { title: string }) {
 		<div>
 			<div className="flex justify-center items-center relative">
 				<h1 className="text-[48px] font-bold">{title}</h1>
-				<CloseButton onClick={() => console.log('Closed window')} />
+				<CloseButton onClick={onClose} />
 			</div>
 
 			<div className="pl-[15px]">

@@ -1,13 +1,14 @@
 // TaskModal.tsx
+import { TaskType } from '../../../entities/task';
 import { Modal } from '../../../shared/ui';
-import { TaskData, TaskFormProvider } from '../model/context/TaskFormProvider';
+import { TaskFormProvider } from '../model/context/TaskFormProvider';
 import { TaskForm } from './TaskForm';
 
 type TaskModalProps = {
 	mode: 'create' | 'edit';
 	isOpen: boolean;
 	onClose: () => void;
-	initialData?: TaskData;
+	initialData?: TaskType;
 	onSubmit: () => void;
 	onDelete: () => void;
 };
@@ -18,7 +19,7 @@ export function TaskModal({ mode, isOpen, onClose, initialData, onSubmit, onDele
 	return (
 		<Modal>
 			<TaskFormProvider initialData={initialData}>
-				<TaskForm mode={mode} onSubmit={onSubmit} onDelete={onDelete} />
+				<TaskForm mode={mode} onSubmit={onSubmit} onDelete={onDelete} onClose={onClose} />
 			</TaskFormProvider>
 		</Modal>
 	);
