@@ -1,7 +1,7 @@
 import { isTokenExpired } from '../utilities/tokenUtils';
 
 export const fetchWithAuth = async (url: string, options: RequestInit = {}, token: string | null, logout: () => void) => {
-	if (!token || !isTokenExpired(token)) {
+	if (!token || isTokenExpired(token)) {
 		logout();
 		throw new Error('Session expired. Please log in again.');
 	}

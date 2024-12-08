@@ -30,7 +30,6 @@ export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 					} catch (error) {
 						alert(error);
 					}
-
 					onClose();
 				}}
 			>

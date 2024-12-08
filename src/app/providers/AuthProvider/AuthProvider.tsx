@@ -49,6 +49,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
 	// Функция для разлогина
 	const logout = () => {
+		console.log('logout');
+
 		setUser(null);
 		setToken(null);
 		localStorage.removeItem('token');

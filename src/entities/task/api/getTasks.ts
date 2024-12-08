@@ -13,7 +13,10 @@ export async function getTasks(token: string, logout: () => void): Promise<Array
 			logout
 		);
 	} catch (error) {
-		throw new Error('Error while getting tasks');
+		if (error === 'Request failed') {
+			throw new Error('Error while fetching tasks');
+		}
+		throw error;
 	}
 
 	return data;

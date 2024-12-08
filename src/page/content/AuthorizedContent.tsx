@@ -1,14 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TaskList, TaskType } from '../../entities/task';
-import { tasks } from '../mock/data/tasks';
 import { MainButton } from '../../shared/ui';
 import { TaskModal } from '../../features/manage-task';
+import { getTasks } from '../../entities/task/api';
+import { useAuth } from '../../app/providers/AuthProvider/AuthProvider';
+import { mapTaskFromApi } from '../../entities/task/lib/taskMapper';
 
 export function AuthorizedContent() {
 	const [isModalWindowOpen, setModalwindowOpen] = useState<boolean>(false);
 	const [isEditWindowOpen, setEditWindowOpen] = useState<boolean>(false);
+	const { token, logout } = useAuth();
+	const [tasks, setTasks] = useState<Array<TaskType>>([]);
 
 	const [currentEditingTask, setCurrentEditingTask] = useState<TaskType | undefined>(undefined);
+
+	async function updateTasks() {
+		try {
+			const tasksApi = await getTasks(token!, logout);
+			const tasks = tasksApi.map((taskApi) => {
+				return mapTaskFromApi(taskApi);
+			});
+			setTasks(tasks);
+		} catch (err) {
+			alert(err);
+		}
+	}
+
+	useEffect(() => {
+		if (token && !isEditWindowOpen && !isModalWindowOpen) {
+			updateTasks();
+		} else {
+			throw new Error('Expired token');
+		}
+	}, [isEditWindowOpen, isModalWindowOpen]);
 
 	return (
 		<div className="relative pb-[200px]">

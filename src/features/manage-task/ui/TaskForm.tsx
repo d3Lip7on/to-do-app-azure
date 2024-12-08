@@ -3,6 +3,10 @@ import { MainButton } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
+import { createTask, TaskApiType } from '../../../entities/task/api';
+import { TaskType } from '../../../entities/task';
+import { colors } from '../model/data/colors';
+import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
 
 type ModeType = 'create' | 'edit';
 
@@ -32,13 +36,34 @@ function getTaskTitle(mode: ModeType): string {
 export function TaskForm({ mode, onClose }: TaskFormProps) {
 	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useFormState();
 
+	const { token, logout } = useAuth();
+
 	const title = getTaskTitle(mode);
 
-	const handleCreate = () => {
-		// TODO: handle this case
-		textInputState === ''
-			? alert('Enter title!')
-			: console.log(textInputState, textAreaState, textDateState, textTimeState, activeColor);
+	const handleCreate = async () => {
+		if (token) {
+			if (mode === 'create') {
+				let due: string | undefined = undefined;
+				if (textDateState) {
+					due = textDateState;
+					if (textTimeState) {
+						due.concat(textTimeState);
+					}
+				}
+				const task: TaskApiType = {
+					id: '',
+					title: textInputState,
+					description: textAreaState,
+					color: activeColor,
+					isDone: false,
+					due: due,
+				};
+				await createTask(task, token, logout);
+				onClose();
+			}
+		} else {
+			throw new Error('No token while using it');
+		}
 	};
 
 	const handleDelete = () => {
