@@ -9,6 +9,7 @@ type AuthContextType = {
 	isAuthenticated: boolean;
 	login: (username: string, password: string) => Promise<void>;
 	logout: () => void;
+	token: string | null;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -54,7 +55,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 		localStorage.removeItem('user');
 	};
 
-	return <AuthContext.Provider value={{ user, isAuthenticated: !!token, login, logout }}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ user, isAuthenticated: !!token, login, logout, token }}>{children}</AuthContext.Provider>;
 };
 
 // Хук для доступа к AuthContext
