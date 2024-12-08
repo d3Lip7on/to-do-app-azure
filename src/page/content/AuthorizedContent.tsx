@@ -35,8 +35,8 @@ export function AuthorizedContent() {
 	return (
 		<div className="relative pb-[200px]">
 			<div className="pt-[37px] px-[10px] flex flex-col items-center">
-				<h1 className="text-[48px] text-text-secondary text-center mb-[50px]">My Tasks</h1>
-				<div className="max-w-[774px] m-auto pb-[37px]">
+				<h1 className="text-[48px] text-text-secondary text-center mb-[30px]">My Tasks</h1>
+				<div className="max-w-[774px] w-full m-auto pb-[37px]">
 					<TaskList
 						tasks={tasks}
 						onEditTask={(task) => {

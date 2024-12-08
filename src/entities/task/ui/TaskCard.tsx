@@ -8,24 +8,20 @@ type TaskCardProps = {
 
 export function TaskCard({ task, onEdit }: TaskCardProps) {
 	return (
-		<div>
-			{task.due != null && (
-				<h3 className="pl-[15px] text-[27px] text-text-secondary leading-[27px]">
-					{getDayMonthYearFromDate(task.due)}
-				</h3>
-			)}
+		<div className="">
+			{task.due != null && <h3 className="pl-[15px] text-[27px] text-text-secondary leading-[27px]">{getDayMonthYearFromDate(task.due)}</h3>}
 
 			<div
-				className=" text-text-primary"
+				className=" text-text-primary min-h-[70px]"
 				style={{
 					background: task.color,
 				}}
 			>
-				<div className="flex gap-[15px] h-full pl-[15px] pr-[5px] py-[5px]">
+				<div className="flex gap-[15px] pl-[15px] pr-[5px] py-[5px]">
 					<button className="w-[28px] h-[28px] border-[4px] border-black rounded-sm flex-shrink-0 self-center">
 						{task.isDone && <img src="/icons/done.svg" className="w-full h-full object-cover scale-[1.2]" />}
 					</button>
-					<div className="flex flex-col flex-grow">
+					<div className="flex flex-col flex-grow min-w-0 break-words">
 						<h3 className="text-[24px] leading-[24px]">{task.title}</h3>
 						<p className="text-[18px]">{task.description}</p>
 					</div>
