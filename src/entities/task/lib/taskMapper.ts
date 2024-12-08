@@ -19,6 +19,17 @@ export function mapTaskFromApi(taskFromApi: TaskApiType): TaskType {
 	};
 }
 
-export function mapTaskToApi() {
-	// TODO: handle this case
+export function mapTaskToApi(task: TaskType): TaskApiType {
+	let due: string | undefined;
+	if (task.due != null) {
+		const taskDue = task.due;
+		const date = `${taskDue.getFullYear()}-${taskDue.getMonth()}-${taskDue.getDate()}`;
+		let time: string = '';
+		if (task.hasTime) {
+			time = `T${taskDue.getHours()}:${taskDue.getMinutes()}`;
+		}
+		due = `${date}${time}`;
+	}
+
+	return { id: task.id, color: task.color, isDone: task.isDone, title: task.title, description: task.description, due: due };
 }
