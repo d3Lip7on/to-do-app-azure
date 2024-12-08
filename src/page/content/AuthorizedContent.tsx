@@ -29,8 +29,6 @@ export function AuthorizedContent() {
 	useEffect(() => {
 		if (token && !isEditWindowOpen && !isModalWindowOpen) {
 			updateTasks();
-		} else {
-			throw new Error('Expired token');
 		}
 	}, [isEditWindowOpen, isModalWindowOpen]);
 
