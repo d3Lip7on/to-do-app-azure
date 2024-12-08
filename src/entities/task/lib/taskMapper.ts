@@ -8,6 +8,8 @@ export function mapTaskFromApi(taskFromApi: TaskApiType): TaskType {
 		due = new Date(taskFromApi.due);
 		hasTime = taskFromApi.due.includes('T') && taskFromApi.due.split('T')[1]?.includes(':');
 	}
+	console.log(due);
+
 	return {
 		id: taskFromApi.id,
 		color: taskFromApi.color,

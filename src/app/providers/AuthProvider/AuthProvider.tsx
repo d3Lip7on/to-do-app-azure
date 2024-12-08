@@ -1,4 +1,3 @@
-// app/providers/AuthProvider/AuthProvider.tsx
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { UserType } from '../../../entities/user';
 import { loginUser } from '../../../features/login/api/loginUser'; // Ваш API для логина
@@ -38,7 +37,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 			setToken(token);
 			setUser({ username: user });
 
-			// Сохраняем токен и пользователя в localStorage
 			localStorage.setItem('token', token);
 			localStorage.setItem('user', JSON.stringify(user));
 		} catch (error) {
@@ -47,7 +45,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 		}
 	};
 
-	// Функция для разлогина
 	const logout = () => {
 		console.log('logout');
 
@@ -60,7 +57,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 	return <AuthContext.Provider value={{ user, isAuthenticated: !!token, login, logout, token }}>{children}</AuthContext.Provider>;
 };
 
-// Хук для доступа к AuthContext
 export const useAuth = () => {
 	const context = useContext(AuthContext);
 	if (!context) {

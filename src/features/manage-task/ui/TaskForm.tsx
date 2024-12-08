@@ -4,8 +4,6 @@ import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
 import { createTask, TaskApiType } from '../../../entities/task/api';
-import { TaskType } from '../../../entities/task';
-import { colors } from '../model/data/colors';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
 
 type ModeType = 'create' | 'edit';
@@ -44,12 +42,14 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 		if (token) {
 			if (mode === 'create') {
 				let due: string | undefined = undefined;
-				if (textDateState) {
+				if (textDateState != null) {
 					due = textDateState;
-					if (textTimeState) {
-						due.concat(textTimeState);
+					if (textTimeState != null) {
+						due = `${due}T${textTimeState}`;
 					}
 				}
+				console.log(due);
+
 				const task: TaskApiType = {
 					id: '',
 					title: textInputState,

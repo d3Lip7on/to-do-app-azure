@@ -42,7 +42,6 @@ export function AuthorizedContent() {
 						onEditTask={(task) => {
 							setCurrentEditingTask(task);
 							setEditWindowOpen(true);
-							console.log(isEditWindowOpen);
 						}}
 					/>
 				</div>

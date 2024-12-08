@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Canvas, FormTitle, MainButton } from '../../shared/ui';
+import { Canvas, MainButton } from '../../shared/ui';
 import { RegisterModal } from '../../features/register';
 
 export function NotAuthorizedContent() {

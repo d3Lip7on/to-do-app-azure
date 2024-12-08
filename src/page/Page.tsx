@@ -1,5 +1,4 @@
 import { useAuth } from '../app/providers/AuthProvider/AuthProvider';
-import { LoginModal } from '../features/login';
 import { AuthorizedContent } from './content/AuthorizedContent';
 import { NotAuthorizedContent } from './content/NotAuthorizedContent';
 import { Footer } from './layout/Footed';
