@@ -1,5 +1,5 @@
-import { TaskApiType } from '../api/TaskApiTypes';
-import { TaskType } from '../model/types/TaskType';
+import { TaskApiType } from '../api';
+import { TaskType } from '../model';
 
 export function mapTaskFromApi(taskFromApi: TaskApiType): TaskType {
 	let due: Date | undefined = undefined;
