@@ -4,7 +4,7 @@ import { LoginModal } from '../../features/login';
 
 export function Header() {
 	const [isLoginModalOpen, setLoginModalOpen] = useState<boolean>(false);
-	const { isAuthenticated, user } = useAuth();
+	const { isAuthenticated, user, logout } = useAuth();
 	return (
 		<div className="bg-background-secondary flex justify-between px-[75px]">
 			<div className="flex gap-[7px] items-center">
@@ -16,7 +16,14 @@ export function Header() {
 			{isAuthenticated ? (
 				<div className="flex gap-[37px] items-center text-[24px]">
 					<p className="text-accent">Hello, {user?.username}</p>
-					<button className="h-[52px] px-[15px] bg-accent flex items-center">Log out</button>
+					<button
+						onClick={() => {
+							logout();
+						}}
+						className="h-[52px] px-[15px] bg-accent flex items-center"
+					>
+						Log out
+					</button>
 				</div>
 			) : (
 				<div className="flex gap-[37px] items-center text-[24px]">
