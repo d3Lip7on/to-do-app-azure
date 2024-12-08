@@ -28,8 +28,8 @@ export function RegisterForm({ onClose, onSubmit }: SignUpFormProps) {
 				onClick={async () => {
 					try {
 						validate();
-						await registerUser({ username: usernameInputState, password: passwordInputState });
-						login(usernameInputState, passwordInputState);
+						await registerUser({ username: usernameInputState, password: passwordInputState, email: emailInputState });
+						login(emailInputState, passwordInputState);
 						onClose();
 					} catch (error) {
 						alert(error);

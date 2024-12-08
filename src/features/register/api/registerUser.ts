@@ -2,6 +2,7 @@ import { BASE_URL } from '../../../shared/api';
 
 type RegisterUserParams = {
 	username: string;
+	email: string;
 	password: string;
 };
 

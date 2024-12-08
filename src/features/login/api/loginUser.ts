@@ -2,10 +2,11 @@ import { BASE_URL } from '../../../shared/api';
 
 type LoginResponseType = {
 	token: string;
+	username: string;
 };
 
 type LoginUserType = {
-	username: string;
+	email: string;
 	password: string;
 };
 

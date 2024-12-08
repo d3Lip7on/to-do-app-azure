@@ -29,11 +29,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 		}
 	}, []);
 
-	const login = async (username: string, password: string) => {
+	const login = async (email: string, password: string) => {
 		try {
-			const token = (await loginUser({ username, password })).token; // Вызываем API логина
+			const response = await loginUser({ email, password }); // Вызываем API логина
+			const token = response.token;
+			const user = response.username;
 			setToken(token);
-			setUser({ username: username });
+			setUser({ username: user });
 
 			// Сохраняем токен и пользователя в localStorage
 			localStorage.setItem('token', token);
