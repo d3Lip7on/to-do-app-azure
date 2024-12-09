@@ -69,13 +69,19 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 			}
 			if (mode == 'edit') {
 				let due: string | undefined = undefined;
-				if (textDateState != null) {
+				if (textDateState != '') {
 					due = textDateState;
-					if (textTimeState != null) {
-						due = `${due}T${textTimeState}`;
-					}
+				} else {
+					const currentDate = new Date();
+					const year = normalizeDateNumber(currentDate.getFullYear());
+					const month = normalizeDateNumber(currentDate.getMonth() + 1);
+					const date = normalizeDateNumber(currentDate.getDate());
+					due = `${year}-${month}-${date}`;
 				}
-				console.log(due);
+
+				if (textTimeState != '') {
+					due = `${due}T${textTimeState}`;
+				}
 
 				const task: TaskApiType = {
 					id: id,
