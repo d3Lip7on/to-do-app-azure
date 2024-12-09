@@ -1,14 +1,10 @@
+import { normalizeDateNumber } from '../../../shared/lib/dateParser';
 import { TaskApiType } from '../api';
 import { TaskType } from '../model';
 
 export function mapTaskFromApi(taskFromApi: TaskApiType): TaskType {
-	let due: Date | undefined = undefined;
-	let hasTime = false;
-	if (taskFromApi.due != null) {
-		due = new Date(taskFromApi.due);
-		hasTime = taskFromApi.due.includes('T') && taskFromApi.due.split('T')[1]?.includes(':');
-	}
-	console.log(due);
+	const due = new Date(taskFromApi.due);
+	const hasTime = taskFromApi.due.includes('T') && taskFromApi.due.split('T')[1]?.includes(':');
 
 	return {
 		id: taskFromApi.id,
@@ -22,16 +18,18 @@ export function mapTaskFromApi(taskFromApi: TaskApiType): TaskType {
 }
 
 export function mapTaskToApi(task: TaskType): TaskApiType {
-	let due: string | undefined;
-	if (task.due != null) {
-		const taskDue = task.due;
-		const date = `${taskDue.getFullYear()}-${taskDue.getMonth()}-${taskDue.getDate()}`;
-		let time: string = '';
-		if (task.hasTime) {
-			time = `T${taskDue.getHours()}:${taskDue.getMinutes()}`;
-		}
-		due = `${date}${time}`;
+	const taskDue = task.due;
+	const year = normalizeDateNumber(taskDue.getFullYear());
+	const month = normalizeDateNumber(taskDue.getMonth() + 1);
+	const day = normalizeDateNumber(taskDue.getDate());
+	const date = `${year}-${month}-${day}`;
+	let time: string = '';
+	if (task.hasTime) {
+		const hours = normalizeDateNumber(taskDue.getHours());
+		const minutes = normalizeDateNumber(taskDue.getMinutes());
+		time = `T${hours}:${minutes}`;
 	}
+	const due = `${date}${time}`;
 
 	return { id: task.id, color: task.color, isDone: task.isDone, title: task.title, description: task.description, due: due };
 }

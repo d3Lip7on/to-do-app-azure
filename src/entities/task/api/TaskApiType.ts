@@ -4,5 +4,5 @@ export type TaskApiType = {
 	isDone: boolean;
 	color: string;
 	description?: string;
-	due?: string;
+	due: string;
 };
