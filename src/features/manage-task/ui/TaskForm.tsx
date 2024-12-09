@@ -5,6 +5,7 @@ import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
 import { createTask, deleteTask, editTask, TaskApiType } from '../../../entities/task/api';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
+import { normalizeDateNumber } from '../../../shared/lib/dateParser';
 
 type ModeType = 'create' | 'edit';
 
@@ -40,13 +41,20 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 		if (token) {
 			if (mode === 'create') {
 				let due: string | undefined = undefined;
-				if (textDateState != null) {
+
+				if (textDateState != '') {
 					due = textDateState;
-					if (textTimeState != null) {
-						due = `${due}T${textTimeState}`;
-					}
+				} else {
+					const currentDate = new Date();
+					const year = normalizeDateNumber(currentDate.getFullYear());
+					const month = normalizeDateNumber(currentDate.getMonth() + 1);
+					const date = normalizeDateNumber(currentDate.getDate());
+					due = `${year}-${month}-${date}`;
 				}
-				console.log(due);
+
+				if (textTimeState != '') {
+					due = `${due}T${textTimeState}`;
+				}
 
 				const task: TaskApiType = {
 					id: id,
