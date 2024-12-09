@@ -3,7 +3,7 @@ import { MainButton } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
-import { createTask, TaskApiType } from '../../../entities/task/api';
+import { createTask, editTask, TaskApiType } from '../../../entities/task/api';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
 
 type ModeType = 'create' | 'edit';
@@ -16,8 +16,8 @@ type TaskFormProps = {
 };
 
 function useFormState() {
-	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useContext(TaskFormContext);
-	return { textInputState, textAreaState, textDateState, textTimeState, activeColor };
+	const { textInputState, textAreaState, textDateState, textTimeState, activeColor, id } = useContext(TaskFormContext);
+	return { textInputState, textAreaState, textDateState, textTimeState, activeColor, id };
 }
 
 function getTaskTitle(mode: ModeType): string {
@@ -32,7 +32,7 @@ function getTaskTitle(mode: ModeType): string {
 }
 
 export function TaskForm({ mode, onClose }: TaskFormProps) {
-	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useFormState();
+	const { textInputState, textAreaState, textDateState, textTimeState, activeColor, id } = useFormState();
 
 	const { token, logout } = useAuth();
 
@@ -59,6 +59,27 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 					due: due,
 				};
 				await createTask(task, token, logout);
+				onClose();
+			}
+			if (mode == 'edit') {
+				let due: string | undefined = undefined;
+				if (textDateState != null) {
+					due = textDateState;
+					if (textTimeState != null) {
+						due = `${due}T${textTimeState}`;
+					}
+				}
+				console.log(due);
+
+				const task: TaskApiType = {
+					id: id,
+					title: textInputState,
+					description: textAreaState,
+					color: activeColor,
+					isDone: false,
+					due: due,
+				};
+				await editTask(task, token, logout);
 				onClose();
 			}
 		} else {

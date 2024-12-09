@@ -15,6 +15,12 @@ type TaskModalProps = {
 export function TaskModal({ mode, isOpen, onClose, initialData, onSubmit, onDelete }: TaskModalProps) {
 	if (!isOpen) return null;
 
+	if (mode === 'edit') {
+		if (initialData == null) {
+			throw new Error('no initial data to edit');
+		}
+	}
+
 	return (
 		<Modal>
 			<TaskFormProvider initialData={initialData}>
