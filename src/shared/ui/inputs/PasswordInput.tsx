@@ -25,7 +25,11 @@ export function PasswordInput({ onChange, value }: PasswordInputProps) {
 					setPasswordVisibility(!isPasswordVisible);
 				}}
 			>
-				<img src="/icons/eye.svg" />
+				{isPasswordVisible ? (
+					<img className="transition-transform duration-100 transform active:scale-75" src="/icons/eye.svg" />
+				) : (
+					<img className="transition-transform duration-100 transform active:scale-75" src="/icons/eye-closed.svg" />
+				)}
 			</button>
 		</div>
 	);
