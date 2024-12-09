@@ -1,11 +1,9 @@
 import { useContext, useState } from 'react';
 import { LoginFormContext } from '../model/context/LoginFormProvider';
-import { Canvas, MainButton } from '../../../shared/ui';
+import { Canvas, DotsLoader, MainButton } from '../../../shared/ui';
 import { validateInput, validateEmail, validatePassword } from '../../../shared/utilities/ValidateRegistration';
 import { LoginWindow } from './LoginWindow';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
-import { TailSpin, ThreeDots } from 'react-loader-spinner';
-
 type LogInFormProps = {
 	onSubmit: () => void;
 	onClose: () => void;
@@ -38,20 +36,7 @@ export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 					onClose();
 				}}
 			>
-				{isLoading ? (
-					<ThreeDots
-						visible={true}
-						height="80"
-						width="80"
-						color="#000000"
-						radius="9"
-						ariaLabel="three-dots-loading"
-						wrapperStyle={{}}
-						wrapperClass=""
-					/>
-				) : (
-					'Log in'
-				)}
+				{isLoading ? <DotsLoader /> : 'Log in'}
 			</MainButton>
 		</Canvas>
 	);

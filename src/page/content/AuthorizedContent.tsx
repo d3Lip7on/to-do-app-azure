@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { TaskList, TaskType } from '../../entities/task';
-import { MainButton } from '../../shared/ui';
+import { MainButton, OvalLoader } from '../../shared/ui';
 import { TaskModal } from '../../features/manage-task';
 import { editTask, getTasks } from '../../entities/task/api';
 import { useAuth } from '../../app/providers/AuthProvider/AuthProvider';
-import { Oval } from 'react-loader-spinner';
 import { mapTaskFromApi, mapTaskToApi } from '../../entities/task/model/types/mappers';
 
 export function AuthorizedContent() {
@@ -44,16 +43,7 @@ export function AuthorizedContent() {
 				<div className="max-w-[774px] w-full m-auto pb-[37px]">
 					{isLoading ? (
 						<div className="flex flex-col items-center">
-							<Oval
-								visible={true}
-								height="80"
-								width="80"
-								color="#FBF868"
-								secondaryColor="#FBF868"
-								ariaLabel="oval-loading"
-								wrapperStyle={{}}
-								wrapperClass=""
-							/>
+							<OvalLoader />
 						</div>
 					) : (
 						<TaskList

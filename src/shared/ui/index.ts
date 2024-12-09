@@ -8,3 +8,5 @@ export { Modal } from './Modal';
 export { FormTitle } from './FormTitle';
 export { Canvas } from './Canvas';
 export { CloseButton } from './CloseButton';
+export { DotsLoader } from './loaders/DotsLoader';
+export { OvalLoader } from './loaders/OvalLoader';

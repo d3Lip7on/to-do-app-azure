@@ -1,11 +1,10 @@
-import { MainButton, Canvas } from '../../../shared/ui';
+import { MainButton, Canvas, DotsLoader } from '../../../shared/ui';
 import { useContext, useState } from 'react';
 import { validateEmail, validateInput, validatePassword } from '../../../shared/utilities/ValidateRegistration';
 import { RegisterFormContext } from '../model/context/RegisterFormProvider';
 import { RegisterWindow } from './RegisterWindow';
 import { registerUser } from '../api/registerUser';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
-import { ThreeDots } from 'react-loader-spinner';
 
 type SignUpFormProps = {
 	onSubmit: () => void;
@@ -42,20 +41,7 @@ export function RegisterForm({ onClose, onSubmit }: SignUpFormProps) {
 					}
 				}}
 			>
-				{isLoading ? (
-					<ThreeDots
-						visible={true}
-						height="80"
-						width="80"
-						color="#000000"
-						radius="9"
-						ariaLabel="three-dots-loading"
-						wrapperStyle={{}}
-						wrapperClass=""
-					/>
-				) : (
-					'Sign Up'
-				)}
+				{isLoading ? <DotsLoader /> : 'Sign Up'}
 			</MainButton>
 		</Canvas>
 	);

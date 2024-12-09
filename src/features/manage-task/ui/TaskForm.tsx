@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { MainButton } from '../../../shared/ui';
+import { MainButton, DotsLoader } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
@@ -7,8 +7,6 @@ import { createTask, deleteTask, editTask } from '../../../entities/task/api';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
 import { parseDateToStringStandart } from '../../../shared/lib';
 import { TaskApiType } from '../../../entities/task/model';
-import { ThreeDots } from 'react-loader-spinner';
-
 type ModeType = 'create' | 'edit';
 
 type TaskFormProps = {
@@ -117,52 +115,11 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 			<TaskWindow onClose={onClose} title={title} />
 			<div className="flex gap-[7px]">
 				<MainButton onClick={handleCreate}>
-					{mode === 'create' ? (
-						isLoading ? (
-							<ThreeDots
-								visible={true}
-								height="80"
-								width="80"
-								color="#000000"
-								radius="9"
-								ariaLabel="three-dots-loading"
-								wrapperStyle={{}}
-								wrapperClass=""
-							/>
-						) : (
-							'Create'
-						)
-					) : isLoading ? (
-						<ThreeDots
-							visible={true}
-							height="80"
-							width="80"
-							color="#000000"
-							radius="9"
-							ariaLabel="three-dots-loading"
-							wrapperStyle={{}}
-							wrapperClass=""
-						/>
-					) : (
-						'Save'
-					)}
+					{mode === 'create' ? isLoading ? <DotsLoader /> : 'Create' : isLoading ? <DotsLoader /> : 'Save'}
 				</MainButton>
 				{mode === 'edit' && (
 					<MainButton color="#FB686A" onClick={handleDelete}>
-						{isLoadingDelete ? (
-							<ThreeDots
-								visible={true}
-								height="80"
-								width="80"
-								color="#000000"
-								radius="9"
-								ariaLabel="three-dots-loading"
-								wrapperStyle={{}}
-								wrapperClass=""
-							/>
-						) : (
-							'Delete'
-						)}
+						{isLoadingDelete ? <DotsLoader /> : 'Delete'}
 					</MainButton>
 				)}
 			</div>
