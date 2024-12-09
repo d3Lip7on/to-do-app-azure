@@ -26,9 +26,15 @@ export function PasswordInput({ onChange, value }: PasswordInputProps) {
 				}}
 			>
 				{isPasswordVisible ? (
-					<img className="transition-transform duration-100 transform active:scale-75" src="/icons/eye.svg" />
+					<img
+						className="transition-transform duration-100 transform active:scale-75 hover:scale-105"
+						src="/icons/eye.svg"
+					/>
 				) : (
-					<img className="transition-transform duration-100 transform active:scale-75" src="/icons/eye-closed.svg" />
+					<img
+						className="transition-transform duration-100 transform active:scale-75 hover:scale-105"
+						src="/icons/eye-closed.svg"
+					/>
 				)}
 			</button>
 		</div>
