@@ -20,18 +20,44 @@ function useFormState() {
 }
 
 function getTaskTitle(mode: ModeType): string {
-	switch (mode) {
-		case 'create':
-			return 'New Task';
-		case 'edit':
-			return 'Edit Task';
-		default:
-			return '';
+	return mode === 'create' ? 'New Task' : 'Edit Task';
+}
+
+function getDueDate(textDateState: string, textTimeState: string): string {
+	let due: string = '';
+
+	if (textDateState != '') {
+		due = textDateState;
+	} else {
+		const currentDate = new Date();
+		due = parseDateToStringStandart(currentDate);
 	}
+
+	if (textTimeState != '') {
+		due += `T${textTimeState}`;
+	}
+	return due;
+}
+
+function buildTask(
+	id: number,
+	textInputState: string,
+	textAreaState: string,
+	activeColor: string,
+	due: string
+): TaskApiType {
+	return {
+		id,
+		title: textInputState,
+		description: textAreaState,
+		color: activeColor,
+		isDone: false,
+		due,
+	};
 }
 
 export function TaskForm({ mode, onClose }: TaskFormProps) {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
 	const [isLoadingDelete, setIsLoadingDelete] = useState<boolean>(false);
 
 	const { textInputState, textAreaState, textDateState, textTimeState, activeColor, id } = useFormState();
@@ -40,73 +66,48 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 
 	const title = getTaskTitle(mode);
 
-	const handleCreate = async () => {
-		setIsLoading(!isLoading);
+	const handleSubmit = async () => {
 		if (token) {
 			if (mode === 'create') {
-				let due: string | undefined = undefined;
-
-				if (textDateState != '') {
-					due = textDateState;
-				} else {
-					const currentDate = new Date();
-					due = parseDateToStringStandart(currentDate);
+				setIsLoadingSubmit(true);
+				const due = getDueDate(textDateState, textTimeState);
+				const task = buildTask(id, textInputState, textAreaState, activeColor, due);
+				try {
+					await createTask(task, token, logout);
+					onClose();
+				} catch (err) {
+					alert(err);
+				} finally {
+					setIsLoadingSubmit(false);
 				}
-
-				if (textTimeState != '') {
-					due = `${due}T${textTimeState}`;
-				}
-
-				const task: TaskApiType = {
-					id: id,
-					title: textInputState,
-					description: textAreaState,
-					color: activeColor,
-					isDone: false,
-					due: due,
-				};
-				await createTask(task, token, logout);
-				onClose();
 			}
 			if (mode == 'edit') {
-				let due: string | undefined = undefined;
-				if (textDateState != '') {
-					due = textDateState;
-				} else {
-					const currentDate = new Date();
-					due = parseDateToStringStandart(currentDate);
+				setIsLoadingSubmit(true);
+				const due = getDueDate(textDateState, textTimeState);
+				const task = buildTask(id, textInputState, textAreaState, activeColor, due);
+				try {
+					await editTask(task, token, logout);
+					onClose();
+				} catch (err) {
+					alert(err);
+				} finally {
+					setIsLoadingSubmit(false);
 				}
-
-				if (textTimeState != '') {
-					due = `${due}T${textTimeState}`;
-				}
-
-				const task: TaskApiType = {
-					id: id,
-					title: textInputState,
-					description: textAreaState,
-					color: activeColor,
-					isDone: false,
-					due: due,
-				};
-				await editTask(task, token, logout);
-				onClose();
 			}
 		} else {
-			setIsLoading(isLoading);
 			throw new Error('No token while using it');
 		}
 	};
 
 	const handleDelete = async () => {
-		setIsLoadingDelete(!isLoadingDelete);
+		setIsLoadingDelete(true);
 		try {
 			await deleteTask(id, token, logout);
 			onClose();
 		} catch (error) {
 			console.log(error);
 		} finally {
-			setIsLoadingDelete(isLoadingDelete);
+			setIsLoadingDelete(false);
 		}
 	};
 
@@ -114,8 +115,8 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 		<Canvas width="774px">
 			<TaskWindow onClose={onClose} title={title} />
 			<div className="flex gap-[7px]">
-				<MainButton onClick={handleCreate}>
-					{mode === 'create' ? isLoading ? <DotsLoader /> : 'Create' : isLoading ? <DotsLoader /> : 'Save'}
+				<MainButton onClick={handleSubmit}>
+					{mode === 'create' ? isLoadingSubmit ? <DotsLoader /> : 'Create' : isLoadingSubmit ? <DotsLoader /> : 'Save'}
 				</MainButton>
 				{mode === 'edit' && (
 					<MainButton color="#FB686A" onClick={handleDelete}>
