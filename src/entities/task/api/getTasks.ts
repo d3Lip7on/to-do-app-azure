@@ -1,7 +1,7 @@
 import { BASE_URL, fetchWithAuth } from '../../../shared/api';
 import { TaskApiType } from './TaskApiType';
 
-export async function getTasks(token: string, logout: () => void): Promise<Array<TaskApiType>> {
+export async function getTasks(token: string | null, logout: () => void): Promise<Array<TaskApiType>> {
 	let data: Array<TaskApiType> = [];
 	try {
 		data = await fetchWithAuth(

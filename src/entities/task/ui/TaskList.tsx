@@ -4,13 +4,14 @@ import { TaskCard } from './TaskCard';
 type TaskListProps = {
 	tasks: Array<TaskType>;
 	onEditTask: (task: TaskType) => void;
+	onDoneButtonTaskClick: (task: TaskType) => void;
 };
 
-export function TaskList({ tasks, onEditTask }: TaskListProps) {
+export function TaskList({ tasks, onEditTask, onDoneButtonTaskClick }: TaskListProps) {
 	return (
 		<div className="flex flex-col gap-[30px]">
 			{tasks.map((task) => (
-				<TaskCard task={task} onEdit={onEditTask} />
+				<TaskCard task={task} onEdit={onEditTask} onDoneButtonClick={onDoneButtonTaskClick} />
 			))}
 		</div>
 	);

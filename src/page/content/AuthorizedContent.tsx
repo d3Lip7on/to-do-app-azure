@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { TaskList, TaskType } from '../../entities/task';
 import { MainButton } from '../../shared/ui';
 import { TaskModal } from '../../features/manage-task';
-import { getTasks } from '../../entities/task/api';
+import { editTask, getTasks } from '../../entities/task/api';
 import { useAuth } from '../../app/providers/AuthProvider/AuthProvider';
-import { mapTaskFromApi } from '../../entities/task/lib/taskMapper';
+import { mapTaskFromApi, mapTaskToApi } from '../../entities/task/lib/taskMapper';
 
 export function AuthorizedContent() {
 	const [isModalWindowOpen, setModalwindowOpen] = useState<boolean>(false);
@@ -39,9 +39,14 @@ export function AuthorizedContent() {
 				<div className="max-w-[774px] w-full m-auto pb-[37px]">
 					<TaskList
 						tasks={tasks}
-						onEditTask={(task) => {
+						onEditTask={(task: TaskType) => {
 							setCurrentEditingTask(task);
 							setEditWindowOpen(true);
+						}}
+						onDoneButtonTaskClick={async (task: TaskType) => {
+							const switchedDoneTask: TaskType = { ...task, isDone: !task.isDone };
+							await editTask(mapTaskToApi(switchedDoneTask), token, logout);
+							updateTasks();
 						}}
 					/>
 				</div>
@@ -60,8 +65,6 @@ export function AuthorizedContent() {
 						onClose={() => {
 							setModalwindowOpen(false);
 						}}
-						onSubmit={() => {}}
-						onDelete={() => {}}
 					/>
 				)}
 				{isEditWindowOpen && (
@@ -71,8 +74,6 @@ export function AuthorizedContent() {
 						onClose={() => {
 							setEditWindowOpen(false);
 						}}
-						onSubmit={() => {}}
-						onDelete={() => {}}
 						initialData={currentEditingTask}
 					/>
 				)}

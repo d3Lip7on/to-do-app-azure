@@ -1,5 +1,5 @@
 export type TaskApiType = {
-	id: string;
+	id: number;
 	title: string;
 	isDone: boolean;
 	color: string;

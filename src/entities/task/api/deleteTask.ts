@@ -1,13 +1,11 @@
 import { BASE_URL, fetchWithAuth } from '../../../shared/api';
 
-export async function deleteTask(taskID: number, token: string, logout: () => void): Promise<void> {
-	const body = JSON.stringify({ id: taskID });
+export async function deleteTask(taskID: number, token: string | null, logout: () => void): Promise<void> {
 	try {
 		await fetchWithAuth(
-			`${BASE_URL}/tasksfunction`,
+			`${BASE_URL}/tasksfunction?id=${taskID}`,
 			{
 				method: 'DELETE',
-				body,
 			},
 			token,
 			logout

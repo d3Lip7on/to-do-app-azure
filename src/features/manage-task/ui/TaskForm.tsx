@@ -3,21 +3,20 @@ import { MainButton } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
-import { createTask, TaskApiType } from '../../../entities/task/api';
+import { createTask, deleteTask, editTask, TaskApiType } from '../../../entities/task/api';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
+import { normalizeDateNumber } from '../../../shared/lib/dateParser';
 
 type ModeType = 'create' | 'edit';
 
 type TaskFormProps = {
 	mode: ModeType;
-	onSubmit: () => void;
-	onDelete: () => void;
 	onClose: () => void;
 };
 
 function useFormState() {
-	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useContext(TaskFormContext);
-	return { textInputState, textAreaState, textDateState, textTimeState, activeColor };
+	const { textInputState, textAreaState, textDateState, textTimeState, activeColor, id } = useContext(TaskFormContext);
+	return { textInputState, textAreaState, textDateState, textTimeState, activeColor, id };
 }
 
 function getTaskTitle(mode: ModeType): string {
@@ -32,7 +31,7 @@ function getTaskTitle(mode: ModeType): string {
 }
 
 export function TaskForm({ mode, onClose }: TaskFormProps) {
-	const { textInputState, textAreaState, textDateState, textTimeState, activeColor } = useFormState();
+	const { textInputState, textAreaState, textDateState, textTimeState, activeColor, id } = useFormState();
 
 	const { token, logout } = useAuth();
 
@@ -42,16 +41,23 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 		if (token) {
 			if (mode === 'create') {
 				let due: string | undefined = undefined;
-				if (textDateState != null) {
+
+				if (textDateState != '') {
 					due = textDateState;
-					if (textTimeState != null) {
-						due = `${due}T${textTimeState}`;
-					}
+				} else {
+					const currentDate = new Date();
+					const year = normalizeDateNumber(currentDate.getFullYear());
+					const month = normalizeDateNumber(currentDate.getMonth() + 1);
+					const date = normalizeDateNumber(currentDate.getDate());
+					due = `${year}-${month}-${date}`;
 				}
-				console.log(due);
+
+				if (textTimeState != '') {
+					due = `${due}T${textTimeState}`;
+				}
 
 				const task: TaskApiType = {
-					id: '',
+					id: id,
 					title: textInputState,
 					description: textAreaState,
 					color: activeColor,
@@ -61,14 +67,41 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 				await createTask(task, token, logout);
 				onClose();
 			}
+			if (mode == 'edit') {
+				let due: string | undefined = undefined;
+				if (textDateState != '') {
+					due = textDateState;
+				} else {
+					const currentDate = new Date();
+					const year = normalizeDateNumber(currentDate.getFullYear());
+					const month = normalizeDateNumber(currentDate.getMonth() + 1);
+					const date = normalizeDateNumber(currentDate.getDate());
+					due = `${year}-${month}-${date}`;
+				}
+
+				if (textTimeState != '') {
+					due = `${due}T${textTimeState}`;
+				}
+
+				const task: TaskApiType = {
+					id: id,
+					title: textInputState,
+					description: textAreaState,
+					color: activeColor,
+					isDone: false,
+					due: due,
+				};
+				await editTask(task, token, logout);
+				onClose();
+			}
 		} else {
 			throw new Error('No token while using it');
 		}
 	};
 
-	const handleDelete = () => {
-		// TODO: handle this case
-		console.log('Deleted task');
+	const handleDelete = async () => {
+		await deleteTask(id, token, logout);
+		onClose();
 	};
 
 	return (

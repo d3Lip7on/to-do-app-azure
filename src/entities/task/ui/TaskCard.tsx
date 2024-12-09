@@ -3,10 +3,11 @@ import { TaskType } from '../model/types/TaskType';
 
 type TaskCardProps = {
 	task: TaskType;
+	onDoneButtonClick: (task: TaskType) => void;
 	onEdit: (task: TaskType) => void;
 };
 
-export function TaskCard({ task, onEdit }: TaskCardProps) {
+export function TaskCard({ task, onEdit, onDoneButtonClick }: TaskCardProps) {
 	return (
 		<div className="">
 			{task.due != null && (
@@ -22,7 +23,12 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
 				}}
 			>
 				<div className="flex gap-[15px] pl-[15px] pr-[5px] py-[5px] min-h-[70px]">
-					<button className="w-[28px] h-[28px] border-[4px] border-black rounded-sm flex-shrink-0 self-center">
+					<button
+						onClick={() => {
+							onDoneButtonClick(task);
+						}}
+						className="w-[28px] h-[28px] border-[4px] border-black rounded-sm flex-shrink-0 self-center"
+					>
 						{task.isDone && <img src="/icons/done.svg" className="w-full h-full object-cover scale-[1.2]" />}
 					</button>
 					<div
