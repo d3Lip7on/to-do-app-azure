@@ -8,11 +8,9 @@ type TaskModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
 	initialData?: TaskType;
-	onSubmit: () => void;
-	onDelete: () => void;
 };
 
-export function TaskModal({ mode, isOpen, onClose, initialData, onSubmit, onDelete }: TaskModalProps) {
+export function TaskModal({ mode, isOpen, onClose, initialData }: TaskModalProps) {
 	if (!isOpen) return null;
 
 	if (mode === 'edit') {
@@ -24,7 +22,7 @@ export function TaskModal({ mode, isOpen, onClose, initialData, onSubmit, onDele
 	return (
 		<Modal>
 			<TaskFormProvider initialData={initialData}>
-				<TaskForm mode={mode} onSubmit={onSubmit} onDelete={onDelete} onClose={onClose} />
+				<TaskForm mode={mode} onClose={onClose} />
 			</TaskFormProvider>
 		</Modal>
 	);

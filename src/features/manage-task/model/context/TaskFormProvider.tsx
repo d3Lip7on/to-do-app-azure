@@ -15,7 +15,7 @@ interface TaskFormContextType {
 	textTimeState: string;
 	setTextTimeState: (index: string) => void;
 	activeColor: string;
-	id: string;
+	id: number;
 }
 
 export const TaskFormContext = createContext<TaskFormContextType>({
@@ -30,7 +30,7 @@ export const TaskFormContext = createContext<TaskFormContextType>({
 	textTimeState: '',
 	setTextTimeState: () => {},
 	activeColor: 'null',
-	id: '',
+	id: -1,
 });
 
 function getActiveIndex(color: string): number {
@@ -53,7 +53,7 @@ export const TaskFormProvider = ({ children, initialData }: { children: React.Re
 		initialData ? (initialData.due ? (initialData.hasTime ? `${initialData.due.getHours()}:${initialData.due.getMinutes()}` : '') : '') : ''
 	);
 	const activeColor: string = activeIndex != null ? colors[activeIndex] : 'null';
-	const id: string = initialData ? initialData.id : '';
+	const id: number = initialData ? initialData.id : -1;
 
 	return (
 		<TaskFormContext.Provider

@@ -3,15 +3,13 @@ import { MainButton } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
-import { createTask, editTask, TaskApiType } from '../../../entities/task/api';
+import { createTask, deleteTask, editTask, TaskApiType } from '../../../entities/task/api';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
 
 type ModeType = 'create' | 'edit';
 
 type TaskFormProps = {
 	mode: ModeType;
-	onSubmit: () => void;
-	onDelete: () => void;
 	onClose: () => void;
 };
 
@@ -51,7 +49,7 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 				console.log(due);
 
 				const task: TaskApiType = {
-					id: '',
+					id: id,
 					title: textInputState,
 					description: textAreaState,
 					color: activeColor,
@@ -87,9 +85,9 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 		}
 	};
 
-	const handleDelete = () => {
-		// TODO: handle this case
-		console.log('Deleted task');
+	const handleDelete = async () => {
+		await deleteTask(id, token, logout);
+		onClose();
 	};
 
 	return (

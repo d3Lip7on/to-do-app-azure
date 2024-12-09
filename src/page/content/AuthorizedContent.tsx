@@ -60,8 +60,6 @@ export function AuthorizedContent() {
 						onClose={() => {
 							setModalwindowOpen(false);
 						}}
-						onSubmit={() => {}}
-						onDelete={() => {}}
 					/>
 				)}
 				{isEditWindowOpen && (
@@ -71,8 +69,6 @@ export function AuthorizedContent() {
 						onClose={() => {
 							setEditWindowOpen(false);
 						}}
-						onSubmit={() => {}}
-						onDelete={() => {}}
 						initialData={currentEditingTask}
 					/>
 				)}
