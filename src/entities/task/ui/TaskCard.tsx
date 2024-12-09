@@ -11,7 +11,7 @@ export function TaskCard({ task, onEdit, onDoneButtonClick }: TaskCardProps) {
 	return (
 		<div className="">
 			{task.due != null && (
-				<h3 className="pl-[15px] text-[27px] text-text-secondary leading-[27px]">
+				<h3 className="pl-[70px] text-[27px] pb-[8px] text-text-secondary leading-[27px]">
 					{getDayMonthYearFromDate(task.due)}
 				</h3>
 			)}
@@ -22,12 +22,12 @@ export function TaskCard({ task, onEdit, onDoneButtonClick }: TaskCardProps) {
 					background: task.color,
 				}}
 			>
-				<div className="flex gap-[15px] pl-[15px] pr-[5px] py-[5px] min-h-[70px]">
+				<div className="flex gap-[20px] pl-[20px] pr-[20px] py-[20px] min-h-[70px]">
 					<button
 						onClick={() => {
 							onDoneButtonClick(task);
 						}}
-						className="w-[28px] h-[28px] border-[4px] border-black rounded-sm flex-shrink-0 self-center"
+						className="w-[28px] h-[28px] border-[4px] border-black rounded-sm flex-shrink-0 self-start"
 					>
 						{task.isDone && <img src="/icons/done.svg" className="w-full h-full object-cover scale-[1.2]" />}
 					</button>
@@ -35,7 +35,7 @@ export function TaskCard({ task, onEdit, onDoneButtonClick }: TaskCardProps) {
 						className="flex flex-col flex-grow min-w-0 break-words
 					0"
 					>
-						<h3 className="text-[24px] leading-[24px]">{task.title}</h3>
+						<h3 className="text-[24px] leading-[24px] pb-[20px]">{task.title}</h3>
 						<p className="text-[18px]">{task.description}</p>
 					</div>
 					<div className="flex flex-col justify-between items-end flex-shrink-0">
