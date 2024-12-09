@@ -1,9 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { LoginFormContext } from '../model/context/LoginFormProvider';
 import { Canvas, MainButton } from '../../../shared/ui';
 import { validateInput, validateEmail, validatePassword } from '../../../shared/utilities/ValidateRegistration';
 import { LoginWindow } from './LoginWindow';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
+import { TailSpin } from 'react-loader-spinner';
 
 type LogInFormProps = {
 	onSubmit: () => void;
@@ -12,6 +13,7 @@ type LogInFormProps = {
 
 export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 	const { emailInputState, passwordInputState } = useContext(LoginFormContext);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { login } = useAuth();
 
 	const validate = () => {
@@ -25,15 +27,31 @@ export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 			<MainButton
 				onClick={async () => {
 					try {
+						setIsLoading(true);
 						validate();
 						await login(emailInputState, passwordInputState);
 					} catch (error) {
 						alert(error);
+					} finally {
+						setIsLoading(false);
 					}
 					onClose();
 				}}
 			>
-				Log In
+				{isLoading ? (
+					<TailSpin
+						visible={true}
+						height="40"
+						width="40"
+						color={'#000000'}
+						ariaLabel="tail-spin-loading"
+						radius="5"
+						wrapperStyle={{}}
+						wrapperClass=""
+					/>
+				) : (
+					'Log in'
+				)}
 			</MainButton>
 		</Canvas>
 	);
