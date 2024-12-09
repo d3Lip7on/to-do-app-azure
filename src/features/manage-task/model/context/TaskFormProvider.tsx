@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react';
 import { colors } from '../data/colors';
 import { TaskType } from '../../../../entities/task';
-import { normalizeDateNumber } from '../../../../shared/lib/dateParser';
+import { getTimeFromDate, parseDateToStringStandart } from '../../../../shared/lib';
 
 interface TaskFormContextType {
 	activeIndex: number | null;
@@ -42,15 +42,9 @@ export const TaskFormProvider = ({ children, initialData }: { children: React.Re
 	const [activeIndex, setActiveIndex] = useState<number | null>(initialData ? getActiveIndex(initialData.color) : 0);
 	const [textInputState, setTextInputState] = useState<string>(initialData ? initialData.title : '');
 	const [textAreaState, setTextAreaState] = useState<string>(initialData ? (initialData.description ? initialData.description : '') : '');
-	const [textDateState, setTextDateState] = useState<string>(
-		initialData
-			? initialData.due
-				? `${initialData.due.getFullYear()}-${normalizeDateNumber(initialData.due.getMonth() + 1)}-${initialData.due.getDate()}`
-				: ''
-			: ''
-	);
+	const [textDateState, setTextDateState] = useState<string>(initialData ? (initialData.due ? parseDateToStringStandart(initialData.due) : '') : '');
 	const [textTimeState, setTextTimeState] = useState<string>(
-		initialData ? (initialData.due ? (initialData.hasTime ? `${initialData.due.getHours()}:${initialData.due.getMinutes()}` : '') : '') : ''
+		initialData ? (initialData.due ? (initialData.hasTime ? getTimeFromDate(initialData.due) : '') : '') : ''
 	);
 	const activeColor: string = activeIndex != null ? colors[activeIndex] : 'null';
 	const id: number = initialData ? initialData.id : -1;
