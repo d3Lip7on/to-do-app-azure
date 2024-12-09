@@ -1,5 +1,5 @@
 import { BASE_URL, fetchWithAuth } from '../../../shared/api';
-import { TaskApiType } from './TaskApiType';
+import { TaskApiType } from '../model/types/TaskApiType';
 
 export async function editTask(task: TaskApiType, token: string | null, logout: () => void): Promise<void> {
 	const body = JSON.stringify(task);

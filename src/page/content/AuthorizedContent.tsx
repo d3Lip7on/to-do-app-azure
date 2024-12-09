@@ -4,8 +4,8 @@ import { MainButton } from '../../shared/ui';
 import { TaskModal } from '../../features/manage-task';
 import { editTask, getTasks } from '../../entities/task/api';
 import { useAuth } from '../../app/providers/AuthProvider/AuthProvider';
-import { mapTaskFromApi, mapTaskToApi } from '../../entities/task/lib/taskMapper';
 import { Oval } from 'react-loader-spinner';
+import { mapTaskFromApi, mapTaskToApi } from '../../entities/task/model/types/mappers';
 
 export function AuthorizedContent() {
 	const [isModalWindowOpen, setModalwindowOpen] = useState<boolean>(false);

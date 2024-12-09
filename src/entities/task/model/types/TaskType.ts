@@ -4,6 +4,6 @@ export type TaskType = {
 	isDone: boolean;
 	color: string;
 	description?: string;
-	due?: Date;
+	due: Date;
 	hasTime: boolean;
 };

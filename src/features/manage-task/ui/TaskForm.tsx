@@ -3,9 +3,10 @@ import { MainButton } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { TaskWindow } from './TaskWindow';
-import { createTask, deleteTask, editTask, TaskApiType } from '../../../entities/task/api';
+import { createTask, deleteTask, editTask } from '../../../entities/task/api';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
-import { normalizeDateNumber } from '../../../shared/lib/dateParser';
+import { parseDateToStringStandart } from '../../../shared/lib';
+import { TaskApiType } from '../../../entities/task/model';
 import { ThreeDots } from 'react-loader-spinner';
 
 type ModeType = 'create' | 'edit';
@@ -51,10 +52,7 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 					due = textDateState;
 				} else {
 					const currentDate = new Date();
-					const year = normalizeDateNumber(currentDate.getFullYear());
-					const month = normalizeDateNumber(currentDate.getMonth() + 1);
-					const date = normalizeDateNumber(currentDate.getDate());
-					due = `${year}-${month}-${date}`;
+					due = parseDateToStringStandart(currentDate);
 				}
 
 				if (textTimeState != '') {
@@ -78,10 +76,7 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 					due = textDateState;
 				} else {
 					const currentDate = new Date();
-					const year = normalizeDateNumber(currentDate.getFullYear());
-					const month = normalizeDateNumber(currentDate.getMonth() + 1);
-					const date = normalizeDateNumber(currentDate.getDate());
-					due = `${year}-${month}-${date}`;
+					due = parseDateToStringStandart(currentDate);
 				}
 
 				if (textTimeState != '') {

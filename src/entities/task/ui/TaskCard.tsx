@@ -1,4 +1,5 @@
-import { getDayMonthYearFromDate, getTimeFromDate } from '../../../shared/lib/dateParser';
+import { getTimeFromDate } from '../../../shared/lib/date-parser/dateParser';
+import { getDayMonthYearFromDate } from '../lib/dateParser';
 import { TaskType } from '../model/types/TaskType';
 
 type TaskCardProps = {
@@ -11,7 +12,7 @@ export function TaskCard({ task, onEdit, onDoneButtonClick }: TaskCardProps) {
 	return (
 		<div className="">
 			{task.due != null && (
-				<h3 className="pl-[70px] text-[27px] pb-[8px] text-text-secondary leading-[27px]">
+				<h3 className="pl-[15px] text-[27px] text-text-secondary leading-[27px]">
 					{getDayMonthYearFromDate(task.due)}
 				</h3>
 			)}
