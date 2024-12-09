@@ -4,7 +4,7 @@ import { Canvas, MainButton } from '../../../shared/ui';
 import { validateInput, validateEmail, validatePassword } from '../../../shared/utilities/ValidateRegistration';
 import { LoginWindow } from './LoginWindow';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
-import { TailSpin } from 'react-loader-spinner';
+import { TailSpin, ThreeDots } from 'react-loader-spinner';
 
 type LogInFormProps = {
 	onSubmit: () => void;
@@ -39,13 +39,13 @@ export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 				}}
 			>
 				{isLoading ? (
-					<TailSpin
+					<ThreeDots
 						visible={true}
-						height="40"
-						width="40"
-						color={'#000000'}
-						ariaLabel="tail-spin-loading"
-						radius="5"
+						height="80"
+						width="80"
+						color="#000000"
+						radius="9"
+						ariaLabel="three-dots-loading"
 						wrapperStyle={{}}
 						wrapperClass=""
 					/>

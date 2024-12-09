@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { MainButton } from '../../../shared/ui';
 import { Canvas } from '../../../shared/ui/Canvas';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
@@ -6,6 +6,7 @@ import { TaskWindow } from './TaskWindow';
 import { createTask, deleteTask, editTask, TaskApiType } from '../../../entities/task/api';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
 import { normalizeDateNumber } from '../../../shared/lib/dateParser';
+import { ThreeDots } from 'react-loader-spinner';
 
 type ModeType = 'create' | 'edit';
 
@@ -31,6 +32,9 @@ function getTaskTitle(mode: ModeType): string {
 }
 
 export function TaskForm({ mode, onClose }: TaskFormProps) {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoadingDelete, setIsLoadingDelete] = useState<boolean>(false);
+
 	const { textInputState, textAreaState, textDateState, textTimeState, activeColor, id } = useFormState();
 
 	const { token, logout } = useAuth();
@@ -38,6 +42,7 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 	const title = getTaskTitle(mode);
 
 	const handleCreate = async () => {
+		setIsLoading(!isLoading);
 		if (token) {
 			if (mode === 'create') {
 				let due: string | undefined = undefined;
@@ -95,23 +100,74 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 				onClose();
 			}
 		} else {
+			setIsLoading(isLoading);
 			throw new Error('No token while using it');
 		}
 	};
 
 	const handleDelete = async () => {
-		await deleteTask(id, token, logout);
-		onClose();
+		setIsLoadingDelete(!isLoadingDelete);
+		try {
+			await deleteTask(id, token, logout);
+			onClose();
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoadingDelete(isLoadingDelete);
+		}
 	};
 
 	return (
 		<Canvas width="774px">
 			<TaskWindow onClose={onClose} title={title} />
 			<div className="flex gap-[7px]">
-				<MainButton onClick={handleCreate}>{mode === 'create' ? 'Create' : 'Save'}</MainButton>
+				<MainButton onClick={handleCreate}>
+					{mode === 'create' ? (
+						isLoading ? (
+							<ThreeDots
+								visible={true}
+								height="80"
+								width="80"
+								color="#000000"
+								radius="9"
+								ariaLabel="three-dots-loading"
+								wrapperStyle={{}}
+								wrapperClass=""
+							/>
+						) : (
+							'Create'
+						)
+					) : isLoading ? (
+						<ThreeDots
+							visible={true}
+							height="80"
+							width="80"
+							color="#000000"
+							radius="9"
+							ariaLabel="three-dots-loading"
+							wrapperStyle={{}}
+							wrapperClass=""
+						/>
+					) : (
+						'Save'
+					)}
+				</MainButton>
 				{mode === 'edit' && (
 					<MainButton color="#FB686A" onClick={handleDelete}>
-						Delete
+						{isLoadingDelete ? (
+							<ThreeDots
+								visible={true}
+								height="80"
+								width="80"
+								color="#000000"
+								radius="9"
+								ariaLabel="three-dots-loading"
+								wrapperStyle={{}}
+								wrapperClass=""
+							/>
+						) : (
+							'Delete'
+						)}
 					</MainButton>
 				)}
 			</div>
