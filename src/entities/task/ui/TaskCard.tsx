@@ -9,7 +9,11 @@ type TaskCardProps = {
 export function TaskCard({ task, onEdit }: TaskCardProps) {
 	return (
 		<div className="">
-			{task.due != null && <h3 className="pl-[15px] text-[27px] text-text-secondary leading-[27px]">{getDayMonthYearFromDate(task.due)}</h3>}
+			{task.due != null && (
+				<h3 className="pl-[15px] text-[27px] text-text-secondary leading-[27px]">
+					{getDayMonthYearFromDate(task.due)}
+				</h3>
+			)}
 
 			<div
 				className=" text-text-primary "
@@ -34,7 +38,11 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
 								onEdit(task);
 							}}
 						>
-							<img src="/icons/edit.svg" className="w-[24px] h-[24px]" alt="edit task" />
+							<img
+								src="/icons/edit.svg"
+								className="w-[24px] h-[24px] transition-transform duration-100 transform active:scale-75 hover:scale-125"
+								alt="edit task"
+							/>
 						</button>
 						{task.due != null && task.hasTime && <p className="text-[18px]">due {getTimeFromDate(task.due)}</p>}
 					</div>

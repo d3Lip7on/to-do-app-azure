@@ -20,7 +20,7 @@ export function Header() {
 						onClick={() => {
 							logout();
 						}}
-						className="h-[52px] px-[15px] bg-accent flex items-center"
+						className="h-[52px] px-[15px] bg-accent flex items-center transition-transform duration-100 ease-in-out hover:scale-105 hover:filter hover:contrast-[400%] active:scale-95 active:transition"
 					>
 						Log out
 					</button>
@@ -29,7 +29,7 @@ export function Header() {
 				<div className="flex gap-[37px] items-center text-[24px]">
 					<p className="text-accent">Not logged in</p>
 					<button
-						className="h-[52px] px-[15px] bg-accent flex items-center"
+						className="h-[52px] px-[15px] bg-accent flex items-center transition-transform duration-100 ease-in-out hover:scale-105 hover:filter hover:contrast-[400%] active:scale-95 active:transition"
 						onClick={() => {
 							setLoginModalOpen(true);
 						}}
