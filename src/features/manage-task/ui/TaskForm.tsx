@@ -101,7 +101,7 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 					}
 				}
 			} else {
-				alert('Title field is empty');
+				setIsError('Title field is empty');
 			}
 		} else {
 			throw new Error('No token while using it');
