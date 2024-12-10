@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { getTextFromAudio } from '../api/getTextFromAudio';
 import { useAuth } from '../../../app/providers/AuthProvider/AuthProvider';
+import { convertAudioToWav } from '../model/utilities/convertAudioToWav';
 
 type VoiceInputButtonType = {
 	onTextAvailable: (text: string) => void;
@@ -31,10 +32,9 @@ export function VoiceInputButton({ onTextAvailable }: VoiceInputButtonType) {
 
 		mediaRecorder.onstop = async () => {
 			const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-			const audioFile = new File([audioBlob], 'audio.wav', { type: 'audio/wav' });
-
+			const modifiedAudioBlob = await convertAudioToWav(audioBlob);
 			try {
-				const textFromAudio = await getTextFromAudio(audioFile, token, logout);
+				const textFromAudio = await getTextFromAudio(modifiedAudioBlob, token, logout);
 				onTextAvailable(textFromAudio);
 			} catch (error) {
 				alert(error);

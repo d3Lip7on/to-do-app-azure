@@ -4,7 +4,7 @@ type GetTextFromAudioResponseType = {
 	text: string;
 };
 
-export const getTextFromAudio = async (audioFile: File, token: string | null, logout: () => void): Promise<string> => {
+export const getTextFromAudio = async (audioFile: Blob, token: string | null, logout: () => void): Promise<string> => {
 	let response: GetTextFromAudioResponseType | undefined;
 	try {
 		response = await fetchWithAuth(
