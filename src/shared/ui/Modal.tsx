@@ -15,6 +15,16 @@ export function Modal({ children, onClose }: ModalProps) {
 	};
 
 	useEffect(() => {
+		// Отключаем прокрутку при монтировании
+		document.body.style.overflow = 'hidden';
+
+		// Включаем прокрутку при размонтировании
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, []);
+
+	useEffect(() => {
 		document.addEventListener('mousedown', handleClickOutside);
 		return () => {
 			document.removeEventListener('mousedown', handleClickOutside);
