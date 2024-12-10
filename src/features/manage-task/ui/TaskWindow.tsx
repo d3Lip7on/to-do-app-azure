@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { FormTitle, TextInput, TextArea, DateInput, TimeInput, CloseButton } from '../../../shared/ui/index';
 import { TaskFormContext } from '../model/context/TaskFormProvider';
 import { SelectColor } from './SelectColor';
+import { VoiceInputButton } from '../../voice-input';
 
 export function TaskWindow({ title, onClose }: { title: string; onClose: () => void }) {
 	const {
@@ -39,12 +40,21 @@ export function TaskWindow({ title, onClose }: { title: string; onClose: () => v
 				<div className="pl-[15px]">
 					<FormTitle>Description</FormTitle>
 				</div>
-				<TextArea
-					onChange={(newValue) => {
-						setTextAreaState(newValue);
-					}}
-					value={textAreaState}
-				/>
+				<div className="relative">
+					<TextArea
+						onChange={(newValue) => {
+							setTextAreaState(newValue);
+						}}
+						value={textAreaState}
+					/>
+					<div className="absolute top-0 right-0">
+						<VoiceInputButton
+							onTextAvailable={(text) => {
+								setTextAreaState(text);
+							}}
+						/>
+					</div>
+				</div>
 			</div>
 			<div className="flex gap-[7px]">
 				<div className="flex flex-col w-[100%]	">

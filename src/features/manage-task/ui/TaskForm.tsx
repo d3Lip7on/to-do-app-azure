@@ -39,13 +39,7 @@ function getDueDate(textDateState: string, textTimeState: string): string {
 	return due;
 }
 
-function buildTask(
-	id: number,
-	textInputState: string,
-	textAreaState: string,
-	activeColor: string,
-	due: string
-): TaskApiType {
+function buildTask(id: number, textInputState: string, textAreaState: string, activeColor: string, due: string): TaskApiType {
 	return {
 		id,
 		title: textInputState,

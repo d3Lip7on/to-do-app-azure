@@ -1,3 +1,4 @@
+import { VoiceInputButton } from '../features/voice-input';
 import { Page } from '../page/Page';
 import { AuthProvider } from './providers/AuthProvider';
 
