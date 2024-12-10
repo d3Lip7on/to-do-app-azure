@@ -62,31 +62,32 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 
 	const handleSubmit = async () => {
 		if (token) {
-			if (mode === 'create') {
+			if (textInputState != '') {
 				setIsLoadingSubmit(true);
 				const due = getDueDate(textDateState, textTimeState);
 				const task = buildTask(id, textInputState, textAreaState, activeColor, due);
-				try {
-					await createTask(task, token, logout);
-					onClose();
-				} catch (err) {
-					alert(err);
-				} finally {
-					setIsLoadingSubmit(false);
+				if (mode === 'create') {
+					try {
+						await createTask(task, token, logout);
+						onClose();
+					} catch (err) {
+						alert(err);
+					} finally {
+						setIsLoadingSubmit(false);
+					}
 				}
-			}
-			if (mode == 'edit') {
-				setIsLoadingSubmit(true);
-				const due = getDueDate(textDateState, textTimeState);
-				const task = buildTask(id, textInputState, textAreaState, activeColor, due);
-				try {
-					await editTask(task, token, logout);
-					onClose();
-				} catch (err) {
-					alert(err);
-				} finally {
-					setIsLoadingSubmit(false);
+				if (mode == 'edit') {
+					try {
+						await editTask(task, token, logout);
+						onClose();
+					} catch (err) {
+						alert(err);
+					} finally {
+						setIsLoadingSubmit(false);
+					}
 				}
+			} else {
+				alert('Title field is empty');
 			}
 		} else {
 			throw new Error('No token while using it');

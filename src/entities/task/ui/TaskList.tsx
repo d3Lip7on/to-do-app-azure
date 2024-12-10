@@ -11,7 +11,7 @@ export function TaskList({ tasks, onEditTask, onDoneButtonTaskClick }: TaskListP
 	return (
 		<div className="flex flex-col gap-[30px]">
 			{tasks.map((task) => (
-				<TaskCard task={task} onEdit={onEditTask} onDoneButtonClick={onDoneButtonTaskClick} />
+				<TaskCard key={task.id} task={task} onEdit={onEditTask} onDoneButtonClick={onDoneButtonTaskClick} />
 			))}
 		</div>
 	);
