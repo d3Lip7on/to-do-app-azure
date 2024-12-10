@@ -33,9 +33,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 		try {
 			const response = await loginUser({ email, password }); // Вызываем API логина
 			const token = response.token;
-			const user = response.username;
+			const user: UserType = { username: response.username };
 			setToken(token);
-			setUser({ username: user });
+			setUser(user);
 
 			localStorage.setItem('token', token);
 			localStorage.setItem('user', JSON.stringify(user));
