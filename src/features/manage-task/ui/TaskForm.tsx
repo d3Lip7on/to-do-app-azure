@@ -39,7 +39,13 @@ function getDueDate(textDateState: string, textTimeState: string): string {
 	return due;
 }
 
-function buildTask(id: number, textInputState: string, textAreaState: string, activeColor: string, due: string): TaskApiType {
+function buildTask(
+	id: number,
+	textInputState: string,
+	textAreaState: string,
+	activeColor: string,
+	due: string
+): TaskApiType {
 	return {
 		id,
 		title: textInputState,
@@ -53,6 +59,7 @@ function buildTask(id: number, textInputState: string, textAreaState: string, ac
 export function TaskForm({ mode, onClose }: TaskFormProps) {
 	const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
 	const [isLoadingDelete, setIsLoadingDelete] = useState<boolean>(false);
+	const [isError, setIsError] = useState<string>('');
 
 	const { textInputState, textAreaState, textDateState, textTimeState, activeColor, id } = useFormState();
 
@@ -77,8 +84,8 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 					try {
 						await createTask(task, token, logout);
 						onClose();
-					} catch (err) {
-						alert(err);
+					} catch (error) {
+						setIsError(`${error}`);
 					} finally {
 						setIsLoadingSubmit(false);
 					}
@@ -87,8 +94,8 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 					try {
 						await editTask(task, token, logout);
 						onClose();
-					} catch (err) {
-						alert(err);
+					} catch (error) {
+						setIsError(`${error}`);
 					} finally {
 						setIsLoadingSubmit(false);
 					}
@@ -107,7 +114,7 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 			await deleteTask(id, token, logout);
 			onClose();
 		} catch (error) {
-			console.log(error);
+			setIsError(`${error}`);
 		} finally {
 			setIsLoadingDelete(false);
 		}
@@ -115,18 +122,17 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 
 	return (
 		<Canvas width="774px">
-			<div onKeyDown={handleKeyDown}>
-				<TaskWindow onClose={onClose} title={title} />
-				<div className="flex gap-[7px]">
-					<MainButton onClick={handleSubmit}>
-						{mode === 'create' ? isLoadingSubmit ? <DotsLoader /> : 'Create' : isLoadingSubmit ? <DotsLoader /> : 'Save'}
+			<TaskWindow onClose={onClose} title={title} />
+			<div className="flex justify-center text-red-700 text-[27px] font-bold pb-[20px]">{isError.slice(7)}</div>
+			<div className="flex gap-[7px]">
+				<MainButton onClick={handleSubmit}>
+					{mode === 'create' ? isLoadingSubmit ? <DotsLoader /> : 'Create' : isLoadingSubmit ? <DotsLoader /> : 'Save'}
+				</MainButton>
+				{mode === 'edit' && (
+					<MainButton color="#FB686A" onClick={handleDelete}>
+						{isLoadingDelete ? <DotsLoader /> : 'Delete'}
 					</MainButton>
-					{mode === 'edit' && (
-						<MainButton color="#FB686A" onClick={handleDelete}>
-							{isLoadingDelete ? <DotsLoader /> : 'Delete'}
-						</MainButton>
-					)}
-				</div>
+				)}
 			</div>
 		</Canvas>
 	);
