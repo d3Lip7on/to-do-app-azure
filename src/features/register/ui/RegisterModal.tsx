@@ -10,7 +10,7 @@ type AuthModalProps = {
 
 export function RegisterModal({ onClose, onSubmit }: AuthModalProps) {
 	return (
-		<Modal>
+		<Modal onClose={onClose}>
 			<RegisterFormProvider>
 				<RegisterForm onSubmit={onSubmit} onClose={onClose} />
 			</RegisterFormProvider>

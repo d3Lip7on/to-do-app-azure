@@ -20,7 +20,7 @@ export function TaskModal({ mode, isOpen, onClose, initialData }: TaskModalProps
 	}
 
 	return (
-		<Modal>
+		<Modal onClose={onClose}>
 			<TaskFormProvider initialData={initialData}>
 				<TaskForm mode={mode} onClose={onClose} />
 			</TaskFormProvider>

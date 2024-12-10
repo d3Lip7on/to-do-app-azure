@@ -9,7 +9,7 @@ type AuthModalProps = {
 
 export function LoginModal({ onClose, onSubmit }: AuthModalProps) {
 	return (
-		<Modal>
+		<Modal onClose={onClose}>
 			<LoginFormProvider>
 				<LoginForm onSubmit={onSubmit} onClose={onClose} />
 			</LoginFormProvider>
