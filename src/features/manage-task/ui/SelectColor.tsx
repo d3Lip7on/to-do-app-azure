@@ -8,7 +8,7 @@ type SelectColorProps = {
 
 export function SelectColor({ activeIndex, onClick }: SelectColorProps) {
 	return (
-		<div className="flex gap-[25px] mb-[39px]">
+		<div className="flex gap-[25px] mb-[30px]">
 			{colors.map((color, index) => {
 				return (
 					<ColorBox
