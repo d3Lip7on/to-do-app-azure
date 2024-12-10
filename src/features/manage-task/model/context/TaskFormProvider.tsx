@@ -42,7 +42,9 @@ export const TaskFormProvider = ({ children, initialData }: { children: React.Re
 	const [activeIndex, setActiveIndex] = useState<number | null>(initialData ? getActiveIndex(initialData.color) : 0);
 	const [textInputState, setTextInputState] = useState<string>(initialData ? initialData.title : '');
 	const [textAreaState, setTextAreaState] = useState<string>(initialData ? (initialData.description ? initialData.description : '') : '');
-	const [textDateState, setTextDateState] = useState<string>(initialData ? (initialData.due ? parseDateToStringStandart(initialData.due) : '') : '');
+	const [textDateState, setTextDateState] = useState<string>(
+		initialData ? (initialData.due ? parseDateToStringStandart(initialData.due) : '') : parseDateToStringStandart(new Date())
+	);
 	const [textTimeState, setTextTimeState] = useState<string>(
 		initialData ? (initialData.due ? (initialData.hasTime ? getTimeFromDate(initialData.due) : '') : '') : ''
 	);
