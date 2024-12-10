@@ -62,7 +62,7 @@ export function RegisterWindow({ onClose }: { onClose: () => void }) {
 			<div className="pl-[15px]">
 				<FormTitle>Confirm password</FormTitle>
 			</div>
-			<div className="mb-[52px]">
+			<div className="mb-[32px]">
 				<PasswordInput
 					onChange={(newValue) => {
 						setConfirmPasswordInputState(newValue);

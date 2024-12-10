@@ -3,7 +3,8 @@ import { CloseButton, FormTitle, TextInput, PasswordInput } from '../../../share
 import { LoginFormContext } from '../model/context/LoginFormProvider';
 
 export function LoginWindow({ onClose }: { onClose: () => void }) {
-	const { emailInputState, setEmailInputState, passwordInputState, setPasswordInputState } = useContext(LoginFormContext);
+	const { emailInputState, setEmailInputState, passwordInputState, setPasswordInputState } =
+		useContext(LoginFormContext);
 	const isError = true;
 	return (
 		<div>
@@ -27,7 +28,7 @@ export function LoginWindow({ onClose }: { onClose: () => void }) {
 			<div className="pl-[15px]">
 				<FormTitle>Password</FormTitle>
 			</div>
-			<div className="mb-[52px]">
+			<div className="mb-[32px]">
 				<PasswordInput
 					onChange={(newValue) => {
 						setPasswordInputState(newValue);
