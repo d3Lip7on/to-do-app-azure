@@ -10,3 +10,4 @@ export { Canvas } from './Canvas';
 export { CloseButton } from './CloseButton';
 export { DotsLoader } from './loaders/DotsLoader';
 export { OvalLoader } from './loaders/OvalLoader';
+export { AudioLines } from './AudioLines';

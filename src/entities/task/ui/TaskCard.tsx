@@ -28,7 +28,7 @@ export function TaskCard({ task, onEdit, onDoneButtonClick }: TaskCardProps) {
 						onClick={() => {
 							onDoneButtonClick(task);
 						}}
-						className="w-[28px] h-[28px] border-[4px] border-black rounded-sm flex-shrink-0 self-start"
+						className="w-[28px] h-[28px] border-[4px] border-black rounded-sm flex-shrink-0 self-start transition-transform duration-100 ease-in-out hover:scale-105 active:scale-95"
 					>
 						{task.isDone && <img src="/icons/done.svg" className="w-full h-full object-cover scale-[1.2]" />}
 					</button>
@@ -36,8 +36,12 @@ export function TaskCard({ task, onEdit, onDoneButtonClick }: TaskCardProps) {
 						className="flex flex-col flex-grow min-w-0 break-words
 					0"
 					>
-						<h3 className="text-[24px] leading-[24px] pb-[20px]">{task.title}</h3>
-						<p className="text-[18px]">{task.description}</p>
+						<h3 className="text-[24px] leading-[24px] pb-[20px]">
+							{task.isDone ? <span className="line-through">{task.title}</span> : task.title}
+						</h3>
+						<p className="text-[18px]">
+							{task.isDone ? <span className="line-through">{task.description}</span> : task.description}
+						</p>
 					</div>
 					<div className="flex flex-col justify-between items-end flex-shrink-0">
 						<button
