@@ -12,6 +12,7 @@ type LogInFormProps = {
 export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 	const { emailInputState, passwordInputState } = useContext(LoginFormContext);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isError, setIsError] = useState<string>('');
 	const { login } = useAuth();
 
 	const validate = () => {
@@ -22,6 +23,7 @@ export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 	return (
 		<Canvas width="570px">
 			<LoginWindow onClose={onClose} />
+			<div className="flex justify-center text-red-700 text-[27px] font-bold pb-[20px]">{isError.slice(7)}</div>
 			<MainButton
 				onClick={async () => {
 					try {
@@ -29,11 +31,10 @@ export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 						validate();
 						await login(emailInputState, passwordInputState);
 					} catch (error) {
-						alert(error);
+						setIsError(`${error}`);
 					} finally {
 						setIsLoading(false);
 					}
-					onClose();
 				}}
 			>
 				{isLoading ? <DotsLoader /> : 'Log in'}
