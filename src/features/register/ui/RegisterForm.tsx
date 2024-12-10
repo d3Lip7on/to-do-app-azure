@@ -11,8 +11,7 @@ type SignUpFormProps = {
 };
 
 export function RegisterForm({ onClose, onSubmit }: SignUpFormProps) {
-	const { usernameInputState, emailInputState, passwordInputState, confirmPasswordInputState } =
-		useContext(RegisterFormContext);
+	const { usernameInputState, emailInputState, passwordInputState, confirmPasswordInputState } = useContext(RegisterFormContext);
 	const { login } = useAuth();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isError, setIsError] = useState<string>('');
@@ -23,27 +22,34 @@ export function RegisterForm({ onClose, onSubmit }: SignUpFormProps) {
 		validatePassword(passwordInputState, confirmPasswordInputState);
 	};
 
+	const handleKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			handleSubmit();
+		}
+	};
+
+	async function handleSubmit() {
+		try {
+			setIsLoading(!isLoading);
+			validate();
+			await registerUser({ username: usernameInputState, password: passwordInputState, email: emailInputState });
+			login(emailInputState, passwordInputState);
+			onClose();
+		} catch (error) {
+			setIsError(`${error}`);
+		} finally {
+			setIsLoading(isLoading);
+		}
+	}
+
 	return (
 		<Canvas width="570px">
-			<RegisterWindow onClose={onClose} />
-			<div className="flex justify-center text-red-700 text-[27px] font-bold pb-[20px]">{isError.slice(7)}</div>
-			<MainButton
-				onClick={async () => {
-					try {
-						setIsLoading(!isLoading);
-						validate();
-						await registerUser({ username: usernameInputState, password: passwordInputState, email: emailInputState });
-						login(emailInputState, passwordInputState);
-						onClose();
-					} catch (error) {
-						setIsError(`${error}`);
-					} finally {
-						setIsLoading(isLoading);
-					}
-				}}
-			>
-				{isLoading ? <DotsLoader /> : 'Sign Up'}
-			</MainButton>
+			<div onKeyDown={handleKeyDown}>
+				<RegisterWindow onClose={onClose} />
+				<div className="flex justify-center text-red-700 text-[27px] font-bold pb-[20px]">{isError.slice(7)}</div>
+				<MainButton onClick={handleSubmit}>{isLoading ? <DotsLoader /> : 'Sign Up'}</MainButton>
+			</div>
 		</Canvas>
 	);
 }

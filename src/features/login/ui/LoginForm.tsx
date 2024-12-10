@@ -20,25 +20,33 @@ export function LoginForm({ onClose, onSubmit }: LogInFormProps) {
 		validateEmail(emailInputState);
 	};
 
+	async function handleSubmit() {
+		try {
+			setIsLoading(true);
+			validate();
+			await login(emailInputState, passwordInputState);
+			onClose();
+		} catch (error) {
+			setIsError(`${error}`);
+		} finally {
+			setIsLoading(false);
+		}
+	}
+
+	const handleKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			handleSubmit();
+		}
+	};
+
 	return (
 		<Canvas width="570px">
-			<LoginWindow onClose={onClose} />
-			<div className="flex justify-center text-red-700 text-[27px] font-bold pb-[20px]">{isError.slice(7)}</div>
-			<MainButton
-				onClick={async () => {
-					try {
-						setIsLoading(true);
-						validate();
-						await login(emailInputState, passwordInputState);
-					} catch (error) {
-						setIsError(`${error}`);
-					} finally {
-						setIsLoading(false);
-					}
-				}}
-			>
-				{isLoading ? <DotsLoader /> : 'Log in'}
-			</MainButton>
+			<div onKeyDown={handleKeyDown}>
+				<LoginWindow onClose={onClose} />
+				<div className="flex justify-center text-red-700 text-[27px] font-bold pb-[20px]">{isError.slice(7)}</div>
+				<MainButton onClick={handleSubmit}>{isLoading ? <DotsLoader /> : 'Log in'}</MainButton>
+			</div>
 		</Canvas>
 	);
 }

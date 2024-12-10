@@ -60,6 +60,13 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 
 	const title = getTaskTitle(mode);
 
+	const handleKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			handleSubmit();
+		}
+	};
+
 	const handleSubmit = async () => {
 		if (token) {
 			if (textInputState != '') {
@@ -108,16 +115,18 @@ export function TaskForm({ mode, onClose }: TaskFormProps) {
 
 	return (
 		<Canvas width="774px">
-			<TaskWindow onClose={onClose} title={title} />
-			<div className="flex gap-[7px]">
-				<MainButton onClick={handleSubmit}>
-					{mode === 'create' ? isLoadingSubmit ? <DotsLoader /> : 'Create' : isLoadingSubmit ? <DotsLoader /> : 'Save'}
-				</MainButton>
-				{mode === 'edit' && (
-					<MainButton color="#FB686A" onClick={handleDelete}>
-						{isLoadingDelete ? <DotsLoader /> : 'Delete'}
+			<div onKeyDown={handleKeyDown}>
+				<TaskWindow onClose={onClose} title={title} />
+				<div className="flex gap-[7px]">
+					<MainButton onClick={handleSubmit}>
+						{mode === 'create' ? isLoadingSubmit ? <DotsLoader /> : 'Create' : isLoadingSubmit ? <DotsLoader /> : 'Save'}
 					</MainButton>
-				)}
+					{mode === 'edit' && (
+						<MainButton color="#FB686A" onClick={handleDelete}>
+							{isLoadingDelete ? <DotsLoader /> : 'Delete'}
+						</MainButton>
+					)}
+				</div>
 			</div>
 		</Canvas>
 	);
